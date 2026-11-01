@@ -1,0 +1,1 @@
+<div class="faq">{% for f in faqItems %}<details id="{{ f.q | slugify }}"{% if loop.first and faqOpenFirst %} open{% endif %}><summary>{{ f.q }}</summary><div><p>{{ f.a | mdi | safe }}</p></div></details>{% endfor %}</div>

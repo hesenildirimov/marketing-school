@@ -1,0 +1,25 @@
+---
+permalink: admin/index.html
+eleventyExcludeFromCollections: true
+---
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Marketing School CMS</title>
+</head>
+<body>
+{% if demo %}<script>
+window.CMS_MANUAL_INIT = true;
+window.repoFiles = {{ cms.demoFiles | json | safe }};
+</script>{% endif %}
+<script src="https://unpkg.com/decap-cms@3.16.3/dist/decap-cms.js"></script>
+<script>
+CMS.registerPreviewStyle("{{ 'style.css' | asset if not demo else '../style.css' }}");
+CMS.registerPreviewStyle("body{padding:24px 28px;max-width:760px}", { raw: true });
+{% if demo %}CMS.init({ config: Object.assign({{ cms.config | json | safe }}, { backend: { name: "test-repo" }, local_backend: false, publish_mode: "simple", load_config_file: false }) });{% endif %}
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+---
+layout: base.njk
+heroDark: true
+pagination: { data: courses, size: 1, alias: c }
+eleventyComputed:
+  slug: "{{ c.slug }}"
+  permalink: "{{ c.slug | out }}"
+  seo_title: "{{ c.seo_title }}"
+  seo_description: "{{ c.seo_description }}"
+---
+{%- from "icons.njk" import ico -%}
+{%- set cFaq = faq.items | where("show_on", c.slug) -%}
+<section class="hero dark"><div class="wrap">
+  {% include "crumb.njk" %}
+  <p class="eyebrow">{{ c.eyebrow }}</p>
+  <h1>{{ c.h1 }}</h1>
+  <p class="lede">{{ c.lede }}</p>
+  <ul class="meta-row">{% for ch in c.chips %}<li>{{ ch }}</li>{% endfor %}</ul>
+  <div class="btns"><a class="btn" href="#muraciet">Pulsuz demo dərsə bax</a><a class="btn btn-ghost" href="#proqram">Proqrama bax</a></div>
+  <div class="stats"><div><b>3 ay</b><span>müddət</span></div><div><b>{{ c.modules.length }}</b><span>modul</span></div><div><b>2 həft.</b><span>canlı görüş</span></div><div><b>1:1</b><span>mentorluq</span></div></div>
+</div></section>
+<section><div class="wrap"><p class="eyebrow">Qısa cavab</p><h2>Kurs haqqında</h2>
+  <p class="summary">{{ c.summary }}</p>
+  <p class="prose">{{ c.overview }}</p>
+  <div class="table-scroll prose"><table class="facts"><caption>{{ c.name }} — əsas faktlar</caption><tbody>{% for f in c.facts %}<tr><th scope="row">{{ f.label }}</th><td>{{ (c.price + " " + c.currency) if (f.label == "Qiymət" and c.price) else f.value }}</td></tr>{% endfor %}</tbody></table></div>
+  <p class="hint">Son yenilənmə: <time datetime="{{ c.updated }}">{{ c.updated }}</time></p>
+</div></section>
+<section class="sec-tint-c"><div class="wrap"><div class="grid">
+  <article class="card"><h2 class="card-h">Kimlər üçündür</h2><ul class="tick">{% for a in c.audience %}<li>{{ a }}</li>{% endfor %}</ul></article>
+  <article class="card"><h2 class="card-h">Kursdan sonra nə bacaracaqsınız</h2><ul class="tick">{% for o in c.outcomes %}<li>{{ o }}</li>{% endfor %}</ul></article>
+</div>{% if c.tools %}<p class="tools"><b>Dərsdə istifadə olunan alətlər:</b> {{ c.tools | join(", ") }}</p>{% endif %}</div></section>
+<section><div class="wrap"><p class="eyebrow">Fərq</p><h2>Bu kurs nəyi fərqli edir?</h2><div class="grid">{% for f in c.features %}<article class="card"><h3>{{ f.title }}</h3><p>{{ f.text }}</p></article>{% endfor %}</div></div></section>
+<section id="proqram"><div class="wrap"><p class="eyebrow">Proqram</p><h2>Tam kurs proqramı — {{ c.modules.length }} modul</h2>
+  <p class="lede">3 ay · onlayn · hər modulda ev tapşırığı · 2 həftədən bir canlı sual-cavab.</p>
+  <ol class="modules">{% for m in c.modules %}<li><strong>{{ m.title }}</strong><span>{{ m.text }}</span></li>{% endfor %}</ol></div></section>
+<section id="telimci" class="sec-tint-c"><div class="wrap"><p class="eyebrow">Təlimçi</p>{% set p = c.instructor %}<article class="card person wide"><div class="p-head"><img class="avatar" src="{{ p.photo | asset }}" alt="{{ p.name }}" width="64" height="64" loading="lazy"><div><h2 class="card-h">{{ p.name }}</h2><small>{{ p.role }}</small></div></div><ul class="tick">{% for h in p.highlights %}<li>{{ h }}</li>{% endfor %}</ul>{% if p.linkedin %}<p><a rel="me noopener" target="_blank" href="{{ p.linkedin }}">LinkedIn profili</a></p>{% endif %}</article></div></section>
+{% if cFaq.length %}<section id="suallar"><div class="wrap"><p class="eyebrow">FAQ</p><h2>{{ c.name }} — suallar</h2>
+  {% set faqItems = cFaq %}{% include "faq-list.njk" %}
+  <div class="btns"><a class="btn btn-ghost" href="{{ 'faq' | link }}">Bütün suallar →</a></div></div></section>{% endif %}
+<section><div class="wrap"><h2>Digər proqram</h2><div class="grid">
+  {% for o in courses %}{% if o.slug != c.slug %}<article class="card"><h3><a href="{{ o.slug | link }}">{{ o.name }}</a></h3><p>{{ o.lede }}</p><p><a href="{{ o.slug | link }}">Proqrama bax →</a></p></article>{% endif %}{% endfor %}
+</div></div></section>
+{% include "form.njk" %}

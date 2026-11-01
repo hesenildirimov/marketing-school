@@ -1,0 +1,1 @@
+<p class="crumb"><a href="{{ '' | link }}">Ana səhifə</a>{% for c in crumbs %} / {% if not loop.last %}<a href="{{ c[1] | link }}">{{ c[0] }}</a>{% else %}{{ c[0] }}{% endif %}{% endfor %}</p>

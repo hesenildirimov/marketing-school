@@ -1,0 +1,14 @@
+---
+permalink: sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- set fixed = [["", site.updated], ["marketinq-kursu", courses[0].updated], ["digital-marketinq-kursu", courses[1].updated], ["faq", faq.updated], ["bloq", (collections.posts[0].date | ymd) if collections.posts.length else site.updated]] %}
+{%- for f in fixed %}
+<url><loc>{{ f[0] | abs }}</loc><lastmod>{{ f[1] }}</lastmod></url>
+{%- endfor %}
+{%- for p in collections.posts %}
+<url><loc>{{ p.data.slug | abs }}</loc><lastmod>{{ (p.data.updated or p.date) | ymd }}</lastmod></url>
+{%- endfor %}
+</urlset>

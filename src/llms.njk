@@ -1,0 +1,37 @@
+---
+permalink: llms.txt
+eleventyExcludeFromCollections: true
+---
+# {{ site.name }}
+
+> {{ site.description }}
+
+Son yenilənmə: {{ site.updated }}
+Mərkəz: {{ site.city }}, Azərbaycan · Format: onlayn (Azərbaycan dilində)
+
+Pulsuz demo: müraciət formunu dolduranlara platformaya 1 günlük pulsuz giriş verilir.
+
+## Kurslar
+{% for c in courses %}
+### {{ c.name }}
+Digər adlar: {{ c.alt_names | join(", ") }}
+{{ c.summary }}
+{% for f in c.facts %}- **{{ f.label }}**: {{ (c.price + " " + c.currency) if (f.label == "Qiymət" and c.price) else f.value }}
+{% endfor %}- **Modullar**: {{ c.modules | pluck("title") | join(", ") }}
+- **Link**: {{ c.slug | abs }}
+{% endfor %}
+## Tez-tez verilən suallar (qısa)
+{% for f in faq.items %}
+- **{{ f.q }}** {{ f.a | plain }}
+{%- endfor %}
+
+## Səhifələr
+- [Ana səhifə]({{ '' | abs }}): Hər iki kursun icmalı və müqayisəsi
+{% for c in courses %}- [{{ c.name }}]({{ c.slug | abs }}): {{ c.seo_description }}
+{% endfor %}- [FAQ]({{ 'faq' | abs }}): {{ faq.seo_description }}
+- [Bloq]({{ 'bloq' | abs }}): {{ blog.seo_description }}
+- [Bütün mətn]({{ siteUrl }}/llms-full.txt)
+
+## Bloq
+{% for p in collections.posts %}- [{{ p.data.title }}]({{ p.data.slug | abs }}): {{ p.data.description }}
+{% endfor %}

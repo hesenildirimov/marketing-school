@@ -1,0 +1,58 @@
+{
+  "name": "Marketing School",
+  "alternate_names": [
+    "Marketing School Azerbaijan",
+    "Marketing School Bakı"
+  ],
+  "tagline": "Azərbaycan dilində onlayn marketinq və digital marketinq kursları.",
+  "slogan": "",
+  "description": "Marketing School Azərbaycan dilində onlayn marketinq və rəqəmsal (digital) marketinq kursları təqdim edən təhsil platformasıdır. 3 aylıq proqramlar: videodərslər, canlı sual-cavab, real keyslər, fərdi mentorluq, diplom. Pulsuz demo: platformaya 1 günlük giriş.",
+  "city": "Bakı",
+  "country": "AZ",
+  "address": "",
+  "phone": "",
+  "email": "",
+  "knows_about": [
+    "Marketinq strategiyası",
+    "Rəqəmsal marketinq",
+    "Digital marketinq",
+    "SMM",
+    "SEO",
+    "Google Ads",
+    "Meta Ads",
+    "Google Analytics 4",
+    "Brend idarəetməsi",
+    "Marketinq araşdırması"
+  ],
+  "social": [
+    {
+      "name": "Instagram",
+      "url": "https://instagram.com/marketingschool.az"
+    },
+    {
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/company/marketingschool-az"
+    },
+    {
+      "name": "Facebook",
+      "url": "https://facebook.com/marketingschool.az"
+    }
+  ],
+  "updated": "2026-11-01",
+  "form": {
+    "title": "Pulsuz demo dərsə giriş əldə edin",
+    "lede": "Formu doldurun — platformaya 1 günlük pulsuz giriş göndərək. Demo dərsə baxın, kursun formatını özünüz görün.",
+    "benefits": [
+      "Platformaya 1 günlük pulsuz giriş",
+      "Demo dərs",
+      "Modul-modul tam proqram (PDF)",
+      "Qiymət və qeydiyyat qaydası"
+    ],
+    "button": "Pulsuz giriş al",
+    "consent": "Formu göndərməklə sizinlə əlaqə saxlanmasına razılıq verirsiniz."
+  },
+  "thanks": {
+    "title": "Müraciətiniz qəbul edildi",
+    "text": "Təşəkkür edirik. Platformaya 1 günlük pulsuz giriş məlumatını e-mail ünvanınıza göndərəcəyik."
+  }
+}

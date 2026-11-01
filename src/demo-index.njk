@@ -1,0 +1,64 @@
+---
+eleventyExcludeFromCollections: true
+---
+<!doctype html>
+<html lang="az"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Marketing School Demo</title>
+<style>
+:root{color-scheme:light;--bg:#fff;--surface:#fff;--raise:#F5F7FC;--ink:#0E1324;--muted:#6E7691;--accent:#2E5BF0;--coral:#FF6A3D;--mint:#0FB07A;--violet:#7A5AF8;--line:#E6EAF3;
+--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--sans)}
+.wrap{max-width:900px;margin:0 auto;padding:40px 16px 56px}
+h1{font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.15;letter-spacing:-.02em;margin:0 0 .35em}
+h2{font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:44px 0 14px;font-weight:650}
+a{color:var(--accent)}.eyebrow{font:650 .74rem/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--coral);margin:0 0 14px}
+.lede{color:var(--muted);max-width:64ch}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.tile{display:block;border:1px solid var(--line);border-radius:12px;padding:16px 18px;text-decoration:none;color:inherit;min-width:0;box-shadow:0 8px 24px -14px rgba(14,19,36,.12);transition:transform .14s,border-color .14s}
+.tile:hover{border-color:var(--accent);transform:translateY(-2px)}.tile strong{display:block;margin-bottom:3px}.tile span{display:block;color:var(--muted);font-size:.88rem}
+.tile.cms{background:#EEF3FF;border-color:#C9D7FF}
+.tile code,.check code{font:600 .78rem/1 var(--mono);color:var(--accent)}
+.files{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.files a{background:var(--raise);border:1px solid var(--line);border-radius:9px;padding:11px 14px;text-decoration:none;font:600 .85rem/1.3 var(--mono);color:var(--ink);overflow-wrap:anywhere}
+.files em{display:block;font:400 .78rem/1.4 var(--sans);color:var(--muted);margin-top:3px}
+ul.check{list-style:none;padding:0;margin:0;display:grid;gap:7px}ul.check li{padding-left:26px;position:relative;color:var(--muted);font-size:.93rem}
+ul.check li::before{content:"✓";position:absolute;left:4px;color:var(--mint);font-weight:700}ul.check b{color:var(--ink);font-weight:620}
+.note{background:#FFF4EF;border:1px solid #FFE0D3;border-left:3px solid var(--coral);border-radius:9px;padding:14px 16px;color:var(--muted);font-size:.9rem;margin-top:30px}.note p{margin:0 0 .6em}.note p:last-child{margin:0}
+</style></head><body><div class="wrap">
+<p class="eyebrow">Demo · marketingschool.az · CMS versiyası</p>
+<h1>Marketing School — sayt + CMS</h1>
+<p class="lede">Sayt artıq məzmun idarəetmə sistemi ilə işləyir: bütün mətnlər, kurslar, FAQ və bloq <b>/admin</b> panelindən redaktə olunur. Hər dəyişiklikdən sonra sayt, sitemap, RSS, llms.txt və schema avtomatik yenidən qurulur.</p>
+<h2>CMS</h2>
+<div class="grid">
+  <a class="tile cms" href="admin/index.html"><strong>CMS paneli (demo) →</strong><span>“Login” düyməsini basın. Demo rejimdir — dəyişikliklər yadda saxlanmır.</span></a>
+  <a class="tile cms" href="admin/index.html#/collections/bloq/new"><strong>Yeni bloq yazısı</strong><span>Başlıq, təsvir, “Qısaca” xülasə, mənbələr, əlaqəli kurs</span></a>
+  <a class="tile cms" href="admin/index.html#/collections/sehifeler/entries/faq"><strong>FAQ redaktoru</strong><span>{{ faq.items.length }} sual · hansı səhifədə görünəcəyini seçmək olur</span></a>
+</div>
+<h2>Səhifələr</h2>
+<div class="grid">
+  <a class="tile" href="ana-sehife.html"><strong>Ana səhifə</strong><span>Format, təlimçilər, kurs müqayisə cədvəli, FAQ</span></a>
+  {% for c in courses %}<a class="tile" href="{{ c.slug | link }}"><strong>{{ c.name }}</strong><span>Təlimçi: {{ c.teacher_short }} · {{ c.modules.length }} modul · <code>Course</code> + <code>Person</code> + <code>FAQPage</code></span></a>{% endfor %}
+  <a class="tile" href="faq.html"><strong>FAQ</strong><span>{{ faq.items.length }} sual, 6 mövzu qrupu · <code>FAQPage</code></span></a>
+  <a class="tile" href="bloq.html"><strong>Bloq</strong><span>{{ collections.posts.length }} yazı · <code>Blog</code> schema</span></a>
+  {% for p in collections.posts %}<a class="tile" href="{{ p.data.slug | link }}"><strong>{{ p.data.title }}</strong><span>“Qısaca” bloku, mənbə siyahısı · <code>BlogPosting</code></span></a>{% endfor %}
+</div>
+<h2>SEO və AI faylları — avtomatik</h2>
+<div class="files">
+  <a href="llms.txt">llms.txt<em>Faktlar + bütün FAQ cavabları</em></a>
+  <a href="llms-full.txt">llms-full.txt<em>Saytın bütün mətni</em></a>
+  <a href="sitemap.xml">sitemap.xml<em>lastmod ilə</em></a>
+  <a href="robots.txt">robots.txt<em>AI botlarına açıq</em></a>
+  <a href="rss.xml">rss.xml<em>Bloq lenti</em></a>
+</div>
+<h2>Saytın əsas xüsusiyyətləri</h2>
+<ul class="check">
+  <li><b>Onlayn format:</b> videodərslər istənilən vaxt, 2 həftədən bir canlı sual-cavab, real keyslərə əsaslanan ev tapşırıqları, kurs sonunda 1:1 mentorluq və diplom.</li>
+  <li><b>İki proqram:</b> Marketinq (Həsənalı İldırımov) və Rəqəmsal Marketinq (Zamir Şabanov).</li>
+  <li><b>Pulsuz demo:</b> platformaya 1 günlük pulsuz giriş, telefon nömrəsi məcburidir.</li>
+  <li><b>CMS:</b> bloq, bütün səhifə mətnləri, kurslar, təlimçilər və FAQ <code>/admin</code> panelindən redaktə olunur.</li>
+  <li><b>SEO və AI:</b> schema (<code>Course</code>, <code>Person</code>, <code>FAQPage</code>), sitemap, RSS, <code>llms.txt</code> avtomatik yenilənir.</li>
+</ul>
+<div class="note">
+  <p><b>Qiymət, telefon və ünvan hələ boşdur</b> — CMS-də doldurulanda avtomatik görünəcək.</p>
+</div>
+</div></body></html>

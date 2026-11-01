@@ -1,0 +1,20 @@
+---
+layout: base.njk
+slug: faq
+crumbs: [["FAQ", "faq"]]
+eleventyComputed:
+  permalink: "{{ 'faq' | out }}"
+  seo_title: "{{ faq.seo_title }}"
+  seo_description: "{{ faq.seo_description }}"
+---
+<section class="hero"><div class="wrap">
+  {% include "crumb.njk" %}
+  <h1>{{ faq.h1 }}</h1>
+  <p class="lede">{{ faq.lede }}</p>
+  <nav class="faq-toc" aria-label="Mövzular">{% for g in faq.groups %}<a href="#{{ g.id }}">{{ g.name }}</a>{% endfor %}</nav>
+  <p class="hint">Son yenilənmə: <time datetime="{{ faq.updated }}">{{ faq.updated }}</time></p>
+</div></section>
+{% for g in faq.groups %}{% set faqItems = faq.items | where("group", g.id) %}{% if faqItems.length %}
+<section id="{{ g.id }}" class="faq-group"><div class="wrap"><h2>{{ g.name }}</h2>{% include "faq-list.njk" %}</div></section>
+{% endif %}{% endfor %}
+{% set formTitle = "Sualınızın cavabını tapmadınız?" %}{% set formLede = "Formu doldurun — konkret sualınıza yazılı cavab göndərəcəyik." %}{% include "form.njk" %}

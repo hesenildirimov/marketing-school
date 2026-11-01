@@ -1,0 +1,14 @@
+{
+  "name": "marketingschool-az",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve",
+    "demo": "DEMO=1 eleventy --output=_demo",
+    "cms": "npx decap-server"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "3.1.6"
+  }
+}

@@ -1,0 +1,16 @@
+---
+layout: base.njk
+slug: bloq
+crumbs: [["Bloq", "bloq"]]
+eleventyComputed:
+  permalink: "{{ 'bloq' | out }}"
+  seo_title: "{{ blog.seo_title }}"
+  seo_description: "{{ blog.seo_description }}"
+---
+{%- from "icons.njk" import ico -%}
+<section class="hero"><div class="wrap">
+  {% include "crumb.njk" %}
+  <h1>{{ blog.h1 }}</h1>
+  <p class="lede">{{ blog.lede }}</p>
+</div></section>
+<section><div class="wrap"><ul class="posts">{% for p in collections.posts %}<li><article><span class="pthumb">{{ ico('book') | safe }}</span><div><time datetime="{{ p.date | ymd }}">{{ p.date | ymd }}</time><h2><a href="{{ p.data.slug | link }}">{{ p.data.title }}</a></h2><p>{{ p.data.description }}</p></div></article></li>{% endfor %}</ul></div></section>

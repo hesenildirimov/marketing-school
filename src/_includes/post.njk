@@ -1,0 +1,21 @@
+---
+layout: base.njk
+---
+{%- set related = courses | where("slug", course) -%}
+<article class="hero"><div class="wrap">
+  {% include "crumb.njk" %}
+  <div class="post-head">
+    <time datetime="{{ page.date | ymd }}">{{ page.date | ymd }}</time>{% if updated %} · <span class="muted">Yenilənib: <time datetime="{{ updated | ymd }}">{{ updated | ymd }}</time></span>{% endif %}
+    <h1>{{ title }}</h1>
+    <p class="lede">{{ description }}</p>
+    {% if tags %}<ul class="meta-row">{% for t in tags %}<li>{{ t }}</li>{% endfor %}</ul>{% endif %}
+  </div>
+  {% if key_points %}<aside class="keypoints" aria-label="Qısa xülasə"><strong>Qısaca</strong><ul>{% for k in key_points %}<li>{{ k }}</li>{% endfor %}</ul></aside>{% endif %}
+  <div class="prose">{{ content | safe }}
+  {% if sources %}<h2>Mənbələr</h2><ol class="sources">{% for s in sources %}<li>{% if s.url %}<a href="{{ s.url }}" rel="noopener" target="_blank">{{ s.title }}</a>{% else %}{{ s.title }}{% endif %}</li>{% endfor %}</ol>{% endif %}
+  </div>
+  <nav class="btns" aria-label="Məqalələr arasında keçid">{% set prev = collections.posts | getPreviousCollectionItem(page) %}{% set next = collections.posts | getNextCollectionItem(page) %}{% if next %}<a class="btn btn-ghost" rel="prev" href="{{ next.data.slug | link }}">← {{ next.data.title }}</a>{% endif %}{% if prev %}<a class="btn btn-ghost" rel="next" href="{{ prev.data.slug | link }}">{{ prev.data.title }} →</a>{% endif %}</nav>
+</div></article>
+<section><div class="wrap"><h2>Bu mövzunu dərinləşdir</h2><div class="grid">
+  {% for c in (related if related.length else courses) %}<article class="card"><h3><a href="{{ c.slug | link }}">{{ c.name }}</a></h3><p>{{ c.lede }}</p></article>{% endfor %}
+</div></div></section>

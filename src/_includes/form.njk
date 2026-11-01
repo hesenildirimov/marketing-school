@@ -1,0 +1,24 @@
+<section id="muraciet">
+  <div class="wrap">
+    <div class="cta-info">
+    <h2>{{ formTitle or site.form.title }}</h2>
+    <p class="lede">{{ formLede or site.form.lede }}</p>
+    <ul class="tick cta-list">{% for b in site.form.benefits %}<li>{{ b }}</li>{% endfor %}</ul>
+    </div>
+    <form name="muraciet" method="POST" data-netlify="true" action="{{ 'tesekkur' | link }}">
+      <input type="hidden" name="form-name" value="muraciet">
+      <input type="hidden" name="sehife" value="{{ slug or 'ana-sehife' }}">
+      <p hidden><label>Bot yoxlaması <input name="bot-field"></label></p>
+      <label for="ad">Ad və soyad</label>
+      <input id="ad" name="ad" type="text" autocomplete="name" required>
+      <label for="email">E-mail</label>
+      <input id="email" name="email" type="email" autocomplete="email" required>
+      <label for="kurs">Maraqlandığınız kurs</label>
+      <select id="kurs" name="kurs">{% for c in courses %}<option value="{{ c.slug }}"{% if c.slug == slug %} selected{% endif %}>{{ c.name }}</option>{% endfor %}<option value="her-ikisi">Hər ikisi</option></select>
+      <label for="tel">Əlaqə nömrəsi</label>
+      <input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" placeholder="+994 50 000 00 00" pattern="[+0-9 ()\-]{9,20}" title="Əlaqə nömrəsini daxil edin, məs: +994 50 000 00 00" required>
+      <div class="btns"><button class="btn" type="submit">{{ site.form.button }}</button></div>
+      <p class="hint">{{ site.form.consent }}</p>
+    </form>
+  </div>
+</section>

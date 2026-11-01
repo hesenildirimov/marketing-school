@@ -1,0 +1,247 @@
+{
+  "seo_title": "Onlayn Marketinq və Digital Marketinq Kursu — Suallar",
+  "seo_description": "Onlayn marketinq və digital marketinq kursları haqqında 25 sual: format, mentorluq, diplom, SMM və SEO, müddət, qiymət, iş imkanları.",
+  "h1": "Marketinq kursları haqqında suallar",
+  "lede": "Onlayn marketinq və rəqəmsal (digital) marketinq kursu seçənlərin ən çox verdiyi suallar — qısa, birbaşa cavablarla.",
+  "updated": "2026-11-01",
+  "groups": [
+    {
+      "id": "umumi",
+      "name": "Kurs seçimi"
+    },
+    {
+      "id": "format",
+      "name": "Onlayn format, mentorluq, diplom"
+    },
+    {
+      "id": "reqemsal",
+      "name": "Digital marketinq kursu"
+    },
+    {
+      "id": "marketinq",
+      "name": "Marketinq kursu"
+    },
+    {
+      "id": "karyera",
+      "name": "Karyera"
+    },
+    {
+      "id": "qeydiyyat",
+      "name": "Qiymət və qeydiyyat"
+    }
+  ],
+  "items": [
+    {
+      "group": "umumi",
+      "show_on": [
+        "home"
+      ],
+      "q": "Azərbaycan dilində onlayn marketinq kursu varmı?",
+      "a": "Bəli. Marketing School iki onlayn kurs təqdim edir: [Marketinq Kursu](kurs:marketinq-kursu) və [Rəqəmsal (Digital) Marketinq Kursu](kurs:digital-marketinq-kursu). Hər ikisi Azərbaycan dilindədir, 3 ay davam edir və diplomla bitir. Bakıdan və ya Azərbaycanın istənilən yerindən qoşulmaq olar."
+    },
+    {
+      "group": "format",
+      "show_on": [
+        "home",
+        "marketinq-kursu",
+        "digital-marketinq-kursu"
+      ],
+      "q": "Pulsuz demo dərs varmı?",
+      "a": "Bəli. Müraciət formunu doldurduqda platformaya 1 günlük pulsuz giriş verilir. Bu müddətdə demo dərsə baxıb kursun formatını özünüz görə bilərsiniz."
+    },
+    {
+      "group": "umumi",
+      "show_on": [
+        "home",
+        "marketinq-kursu",
+        "digital-marketinq-kursu"
+      ],
+      "q": "Marketinq kursu ilə digital marketinq kursunun fərqi nədir?",
+      "a": "Marketinq Kursu marketinq qərarlarını öyrədir: bazar və müştəri araşdırması, brend mövqeləndirmə, qiymət, kampaniya planlaması və ölçmə. Rəqəmsal Marketinq Kursu həmin qərarların internet kanallarında icrasını öyrədir: SEO, SMM, Meta və Google reklamları, Google Analytics 4. Qısaca: birincisi strategiya, ikincisi icra haqqındadır."
+    },
+    {
+      "group": "umumi",
+      "show_on": [
+        "home"
+      ],
+      "q": "Hansı kursdan başlamaq daha yaxşıdır?",
+      "a": "Marketinqin ümumi mənzərəsini görmək və brend səviyyəsində qərar vermək istəyirsinizsə — Marketinq Kursundan başlayın. Tez praktiki bacarıq öyrənib SMM, reklam və ya SEO istiqamətində işə başlamaq istəyirsinizsə — Rəqəmsal Marketinq Kursundan başlayın."
+    },
+    {
+      "group": "umumi",
+      "show_on": [
+        "home",
+        "marketinq-kursu",
+        "digital-marketinq-kursu"
+      ],
+      "q": "Marketinqi sıfırdan öyrənmək olar? Ön şərt varmı?",
+      "a": "Bəli, hər iki kurs sıfırdan başlayanlar üçün nəzərdə tutulub. Səviyyə başlanğıc və orta səviyyəyə uyğundur. Rəqəmsal Marketinq Kursu üçün kompüterdən sərbəst istifadə etmək kifayətdir."
+    },
+    {
+      "group": "umumi",
+      "show_on": [
+        "home"
+      ],
+      "q": "Marketinq kursu neçə ay davam edir?",
+      "a": "Hər iki kurs 3 ay davam edir. Dərslər qeydə alınıb, ona görə öz tempinizlə irəliləyə bilərsiniz. Marketinq 9, Rəqəmsal Marketinq 10 moduldan ibarətdir."
+    },
+    {
+      "group": "umumi",
+      "show_on": [],
+      "q": "Yaxşı marketinq kursunu necə seçmək olar?",
+      "a": "Dörd meyara baxın: proqram modul-modul açıq yazılıbmı; tapşırıqlar real keyslərə əsaslanırmı; təlimçi sahədə hazırda işləyirmi; kursun sonunda mentorluq və diplom varmı. Marketing School-un hər iki kursunun tam proqramı və təlimçilərin təcrübəsi saytda açıq yazılıb."
+    },
+    {
+      "group": "format",
+      "show_on": [
+        "home",
+        "marketinq-kursu",
+        "digital-marketinq-kursu"
+      ],
+      "q": "Kurs necə keçir? Dərslərə istədiyim vaxt baxa bilərəm?",
+      "a": "Bəli. Kurs tam onlayndır: dərslər qeydə alınmış videolardır və istənilən vaxt, istənilən cihazdan baxmaq olar — Udemy kimi. Bununla yanaşı, 2 həftədən bir canlı onlayn sual-cavab görüşü keçirilir və kursun sonunda fərdi mentorluq sessiyası olur."
+    },
+    {
+      "group": "format",
+      "show_on": [
+        "home",
+        "marketinq-kursu",
+        "digital-marketinq-kursu"
+      ],
+      "q": "Canlı sual-cavab görüşləri nə vaxt keçirilir?",
+      "a": "Hər 2 həftədən bir onlayn görüş keçirilir. Orada təlimçi suallarınıza cavab verir, ev tapşırıqlarını və real keysləri müzakirə edir. Canlı görüşə qoşula bilməsəniz, sualınızı əvvəlcədən göndərə bilərsiniz. Görüş cədvəli qeydiyyatdan sonra paylaşılır."
+    },
+    {
+      "group": "format",
+      "show_on": [
+        "home",
+        "marketinq-kursu",
+        "digital-marketinq-kursu"
+      ],
+      "q": "Fərdi mentorluq sessiyası nədir?",
+      "a": "Kursun sonunda hər tələbə ilə təlimçi arasında ayrıca fərdi (1:1) onlayn görüş keçirilir. Orada tapşırıqlardakı nəticələriniz, güclü və zəif tərəfləriniz və karyera və ya biznes məqsədinizə uyğun növbəti addımlar müzakirə olunur."
+    },
+    {
+      "group": "format",
+      "show_on": [
+        "home",
+        "marketinq-kursu",
+        "digital-marketinq-kursu"
+      ],
+      "q": "Ev tapşırıqları necə olur?",
+      "a": "Hər modulda real marketinq keyslərinə əsaslanan ev tapşırığı var. Tapşırıqlar nəzəriyyəni dərhal tətbiq etməyə imkan verir və canlı görüşlərdə müzakirə olunur."
+    },
+    {
+      "group": "format",
+      "show_on": [
+        "marketinq-kursu",
+        "digital-marketinq-kursu"
+      ],
+      "q": "Diplom verilirmi?",
+      "a": "Bəli. Kursu uğurla bitirən hər tələbəyə Marketing School-un diplomu (sertifikatı) verilir."
+    },
+    {
+      "group": "reqemsal",
+      "show_on": [
+        "home",
+        "digital-marketinq-kursu"
+      ],
+      "q": "Onlayn digital marketing kursu hansıdır?",
+      "a": "Marketing School-un [Rəqəmsal Marketinq Kursu](kurs:digital-marketinq-kursu) Azərbaycan dilində 3 aylıq onlayn digital marketinq kursudur. 10 modulda SEO, SMM, Meta Ads, Google Ads, Google Analytics 4, konversiya optimizasiyası (CRO) və e-mail marketinq öyrədilir. Təlimçi — AzInTelecom-da aparıcı rəqəmsal marketinq mütəxəssisi Zamir Şabanov."
+    },
+    {
+      "group": "reqemsal",
+      "show_on": [
+        "digital-marketinq-kursu"
+      ],
+      "q": "Digital marketinq, digital marketing və rəqəmsal marketinq eyni şeydir?",
+      "a": "Bəli, üçü də eyni sahənin adıdır. Rəqəmsal marketinq — internet kanalları (axtarış sistemləri, sosial media, reklam platformaları, e-mail və sayt) vasitəsilə məhsul və xidmətin tanıdılması və satılmasıdır. Azərbaycan dilində termin \"rəqəmsal marketinq\"dir; gündəlik dildə \"digital marketinq\" və ingiliscə \"digital marketing\" də işlənir."
+    },
+    {
+      "group": "reqemsal",
+      "show_on": [
+        "digital-marketinq-kursu"
+      ],
+      "q": "Rəqəmsal marketinq kursunda nə öyrədilir?",
+      "a": "Kursda 10 modul var: rəqəmsal marketinqə giriş, sayt və istifadəçi təcrübəsi, texniki SEO, kontent SEO, SMM və sosial media, Meta reklamları, Google reklamları, Google Analytics 4, satışa çevirmə (CRO) və e-mail avtomatlaşdırma. Hər mövzu real keysə əsaslanan tapşırıqla möhkəmlədilir."
+    },
+    {
+      "group": "reqemsal",
+      "show_on": [
+        "digital-marketinq-kursu"
+      ],
+      "q": "SMM kursu ilə digital marketinq kursunun fərqi nədir?",
+      "a": "SMM kursu əsasən sosial media kontentini və səhifə idarəçiliyini əhatə edir. Digital marketinq kursu isə SMM-dən əlavə SEO, Google və Meta reklamları, analitika və konversiya optimizasiyasını da öyrədir. Marketing School-un Rəqəmsal Marketinq Kursunda SMM 10 moduldan biridir və reklam, ölçmə ilə birlikdə tədris olunur."
+    },
+    {
+      "group": "reqemsal",
+      "show_on": [
+        "digital-marketinq-kursu"
+      ],
+      "q": "Google Ads və Meta Ads (Facebook, Instagram reklamı) öyrədilir?",
+      "a": "Bəli. Rəqəmsal Marketinq Kursunda Meta reklamları (Facebook və Instagram) və Google reklamları üçün ayrıca modullar var: kampaniya qurmaq, auditoriya və açar söz seçmək, kreativ test etmək, büdcə idarəsi, Performance Max."
+    },
+    {
+      "group": "reqemsal",
+      "show_on": [
+        "digital-marketinq-kursu"
+      ],
+      "q": "SEO kursu ayrıca keçirilir?",
+      "a": "Ayrıca SEO kursu yoxdur — SEO Rəqəmsal Marketinq Kursunun iki modulunda öyrədilir: texniki SEO (indeksləşmə, sürət, sayt strukturu) və kontent SEO (açar söz araşdırması, kontent strukturu, daxili linklər)."
+    },
+    {
+      "group": "marketinq",
+      "show_on": [
+        "marketinq-kursu"
+      ],
+      "q": "Marketinq nədir?",
+      "a": "Marketinq — şirkətin kimə, nəyi, hansı qiymətə və hansı kanalla satacağına dair qərarlar toplusudur: bazarı və müştərini anlamaq, brendi mövqeləndirmək, qiymət qoymaq, məhsulu tanıtmaq və nəticəni ölçmək. Reklam və SMM marketinqin yalnız bir hissəsidir."
+    },
+    {
+      "group": "marketinq",
+      "show_on": [
+        "marketinq-kursu"
+      ],
+      "q": "Marketinq kursunda nə öyrədilir?",
+      "a": "[Marketinq Kursunda](kurs:marketinq-kursu) 9 modul var: marketinqin əsasları, müştəri və bazar araşdırması, rəqib analizi, brend mövqeləndirmə, brendi böyütmək, qiymət qoymaq, kampaniya planlaması, kanallar və icra, ölçmə və hesabat. Təlimçi — Azersun Holding-də Non-Food kateqoriyasının rəhbəri Həsənalı İldırımov."
+    },
+    {
+      "group": "marketinq",
+      "show_on": [
+        "marketinq-kursu"
+      ],
+      "q": "Marketinq kursu sahibkarlar üçün faydalıdırmı?",
+      "a": "Bəli. Kursdakı tapşırıqları öz biznesinizə tətbiq edə bilərsiniz: müştəri, mövqe, qiymət, kanal və büdcə qərarları. Mentorluq sessiyasında isə konkret biznes sualınızı təlimçi ilə müzakirə etmək olar."
+    },
+    {
+      "group": "karyera",
+      "show_on": [
+        "home",
+        "digital-marketinq-kursu"
+      ],
+      "q": "Digital marketinq kursundan sonra hansı işlərdə çalışmaq olar?",
+      "a": "Rəqəmsal marketinq mütəxəssisi, SMM menecer, performans (reklam) mütəxəssisi, SEO mütəxəssisi və kontent mütəxəssisi vəzifələrinə müraciət etmək olar. Marketinq Kursundan sonra marketinq mütəxəssisi və brend komandası istiqamətləri daha uyğundur."
+    },
+    {
+      "group": "karyera",
+      "show_on": [
+        "marketinq-kursu",
+        "digital-marketinq-kursu"
+      ],
+      "q": "İş təminatı verilirmi?",
+      "a": "Birbaşa iş təminatı verilmir. Bunun əvəzinə təlimçilərlə fərdi mentorluq sessiyası var — orada karyera məqsədinizə uyğun növbəti addımlar müzakirə olunur."
+    },
+    {
+      "group": "qeydiyyat",
+      "show_on": [],
+      "q": "Marketinq kursunun qiyməti nə qədərdir?",
+      "a": "Cari qiymət və ödəniş şərtləri [müraciət formasını](#muraciet) doldurduqdan sonra e-mail ilə göndərilir."
+    },
+    {
+      "group": "qeydiyyat",
+      "show_on": [],
+      "q": "Kurs harada keçirilir və qeydiyyatdan sonra nə olur?",
+      "a": "Kurs tam onlayndır, fiziki məkana ehtiyac yoxdur. Qeydiyyatdan sonra videodərslərə giriş və canlı görüşlərin cədvəli göndərilir."
+    }
+  ]
+}

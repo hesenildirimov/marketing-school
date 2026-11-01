@@ -1,0 +1,15 @@
+---
+layout: base.njk
+slug: tesekkur
+noindex: true
+eleventyExcludeFromCollections: true
+eleventyComputed:
+  permalink: "{{ 'tesekkur' | out }}"
+  seo_title: "{{ site.thanks.title }} | Marketing School"
+  seo_description: "{{ site.thanks.title }}."
+---
+<section class="hero"><div class="wrap">
+  <h1>{{ site.thanks.title }}</h1>
+  <p class="lede">{{ site.thanks.text }}</p>
+  <div class="btns"><a class="btn btn-ghost" href="{{ 'bloq' | link }}">Bloqu oxu</a><a class="btn btn-ghost" href="{{ '' | link }}">Ana səhifə</a></div>
+</div></section>

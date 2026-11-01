@@ -1,0 +1,36 @@
+---
+permalink: llms-full.txt
+eleventyExcludeFromCollections: true
+---
+# {{ site.name }} — saytın tam mətni
+
+> {{ site.description }}
+
+Son yenilənmə: {{ site.updated }}
+{% for c in courses %}
+## {{ c.name }} ({{ c.slug | abs }})
+
+{{ c.summary }}
+
+{{ c.overview }}
+
+Kimlər üçündür: {{ c.audience | join("; ") }}.
+Kursdan sonra: {{ c.outcomes | join("; ") }}.
+{% for f in c.facts %}- {{ f.label }}: {{ (c.price + " " + c.currency) if (f.label == "Qiymət" and c.price) else f.value }}
+{% endfor %}
+Modullar:
+{% for m in c.modules %}{{ loop.index }}. {{ m.title }} — {{ m.text }}
+{% endfor %}{% endfor %}
+## Tez-tez verilən suallar ({{ 'faq' | abs }})
+{% for f in faq.items %}
+### {{ f.q }}
+{{ f.a | plain }}
+{% endfor %}
+## Bloq
+{% for p in collections.posts %}
+### {{ p.data.title }} ({{ p.data.slug | abs }})
+{{ p.date | ymd }} · {{ p.data.description }}
+{% if p.data.key_points %}Qısaca: {{ p.data.key_points | join(" ") }}{% endif %}
+
+{{ p.content | plain | safe }}
+{% endfor %}
