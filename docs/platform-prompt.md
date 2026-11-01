@@ -4,7 +4,7 @@
 
 ---
 
-Sən Marketing School üçün **onlayn tədris platformasını** quracaqsan. Bu, istifadəçinin pulsuz demo aldıqdan sonra daxil olduğu hissədir: videodərslər, ev tapşırıqları, canlı görüşlər, 1:1 mentorluq və diplom. Landing sayt artıq hazırdır. Sən onun davamını yazırsan və bitirəndə tam **security audit** edirsən.
+Sən Marketing School üçün **onlayn tədris platformasını** quracaqsan. Bu, istifadəçinin pulsuz demo aldıqdan sonra daxil olduğu hissədir: videodərslər, ev tapşırıqları, canlı görüşlər, 1:1 mentorluq və diplom. **Bu, demo və ödənişli tələbələr üçün eyni, tək platformadır.** Demo istifadəçi yalnız məhdud görünüş alır (ilk 2 modul, 24 saat). Kimsə ödəniş edəndə **eyni hesabla, yeni qeydiyyat və ya ayrıca sayt olmadan, birbaşa tam kursa keçir**: kilidli modullar, ev tapşırıqları, canlı görüşlər, 1:1 və diplom eyni anda açılır, demo zamanı gördüyü və izlədiyi hər şey (progress, qeydlər) qorunur. Bu keçid dəqiq işləməli və testlə yoxlanılmalıdır (demo → ödəniş → tam giriş, ödəniş webhook-u gələn kimi). Landing sayt artıq hazırdır. Sən onun davamını yazırsan və bitirəndə tam **security audit** edirsən.
 
 ## 0. İşə başlamazdan əvvəl
 1. `README.md`-ni və bütün `src/` qovluğunu oxu. Landing-in necə qurulduğunu, dizayn sistemini və məzmun fayllarını başa düş.
@@ -44,7 +44,7 @@ Sən Marketing School üçün **onlayn tədris platformasını** quracaqsan. Bu,
 - Videoların ümumi uzunluğu və saatı hələ məlum deyil. Rəqəm uydurma, yer tutucu qoy. Qiymət və ödəniş qaydası bölmə 1b-də qəbul edilib.
 
 ## 1b. Qəbul olunmuş biznes qərarları (dəyişdirmə)
-- **Qiymət:** aylıq abunə **99 AZN**. Hissə-hissə ödəniş yoxdur. Kurs 3 aylıqdır, tələbə hər ay yenidən ödəyir. Giriş yalnız ödənişi aktiv olan müddət ərzində açıqdır (`paid_until`).
+- **Qiymət:** hər kurs **ayrıca**, aylıq abunə **99 AZN** (iki kursu alan hər biri üçün 99 AZN ödəyir, bir ödəniş digərinə giriş vermir). Hər kurs üçün ayrıca `enrollment` və `paid_until`. Hissə-hissə ödəniş yoxdur. Kurs 3 aylıqdır, tələbə hər ay yenidən ödəyir. Giriş yalnız ödənişi aktiv olan müddət ərzində açıqdır (`paid_until`).
 - **Canlı sual-cavab:** hər ayın **2-ci və 4-cü həftəsinin 6-cı günü (şənbə), saat 11:00 (Asia/Baku)**. Cədvəl sistemdə qaydadan avtomatik yaradılsın, admin hər birini ayrıca dəyişə və ya ləğv edə bilsin. "2-ci və 4-cü həftənin şənbəsi"ni ayın 2-ci və 4-cü şənbəsi kimi qəbul et və bunu mənə yazılı təsdiqlət.
 - **1:1 mentorluq** yalnız tələbə **bütün modulları bitirəndə** açılır (hər modulun bütün dərsləri tamamlanıb).
 - **Diplom:** ev tapşırıqlarının **ballarının cəmi mümkün ümumi balın ≥ 75%-i** olanda. Tapşırığı etməyən 0 bal alır. Diplom üçün ən azı bir tapşırığın göndərilməsi yetərli deyil, yalnız 75% şərti keçərlidir. Bal təlimçi tərəfindən verilir (hər tapşırıq üçün maksimum bal təlimçi təyin edir).
@@ -180,6 +180,26 @@ Məqsəd: video **tez başlasın, donmasın, yavaş internetdə də işləsin**,
 - Təhlükəsizlik: webhook imzası yoxlanılmalı, idempotent olmalı, məbləğ serverdə hesablanmalı, enrollment yalnız təsdiqlənmiş ödənişdən sonra açılmalıdır.
 - **Mərhələ 1:** admin enrollment-i əl ilə aktivləşdirir. **Mərhələ 2:** onlayn ödəniş.
 
+### 2.11a Landing-də dəyişikliklər (platformadan əvvəl və ya paralel)
+1. **Qiymət göstərilsin.** Landing-də hər kursun yanında "**99 AZN / ay**" və qeyd: "hər kurs ayrıca 99 AZN-dir". Yerlər: ana səhifədə kurs kartları, kurs səhifələrində faktlar cədvəli və hero, FAQ-da qiymət sualı (indi "formdan sonra göndərilir" yazılıb, düzəlt). `src/_data/kurslar/*.json`-da `price: "99"`, `currency: "AZN"` doldurulsun. Schema `Course.offers` (price, priceCurrency, availability) və `llms.txt` avtomatik yenilənsin.
+2. **Üç dilli sayt** (aşağıda bölmə 2.11b). Menyuda dil seçimi.
+3. "Pulsuz demo" CTA və form platformanın demo qeydiyyatına qoşulsun (2.11).
+
+### 2.11b Üç dilli sayt (SEO və xüsusilə GEO üçün İngilis dili kritikdir)
+Landing hazırda yalnız Azərbaycan dilindədir. Saytı **3 dildə** hazırla və menyuda dil seçimini (məs. AZ | EN | RU) əlavə et.
+- **Dillər:** Azərbaycan (əsas), **İngilis**, və üçüncü dil. Üçüncü dil kimi **Rus dilini** təklif edirəm; başlamazdan əvvəl bunu mənə təsdiqlət.
+- **İngilis dilinə xüsusi diqqət:** ChatGPT, Gemini, Perplexity və Google AI Overviews kimi sistemlər cavabları əsasən ingilis dilli mənbələrdən yığır. İngilis versiya sadə tərcümə deyil, **təbii, peşəkar marketinq İngilis dilində** yazılmalıdır. Mətnləri maşın tərcüməsi kimi buraxma, hər səhifə üçün keyfiyyəti özün yoxla, mənim də baxışıma təqdim et. İngilis versiyada Marketing School-un nə olduğu, harada (Azerbaijan, online), kim tərəfindən, qiymət (99 AZN/month per course, indicative USD qeyd oluna bilər), format və təlimçilər birbaşa və qısa cavab kimi yazılsın.
+- **URL və texniki SEO:**
+  - ayrı URL-lər: `/` (az), `/en/`, `/ru/` (və ya yoxlanmış başqa quruluş);
+  - hər səhifədə qarşılıqlı **`hreflang`** (`az`, `en`, `ru`, `x-default`), hər dil öz `canonical`-ı ilə;
+  - sitemap-da dil alternativləri (`xhtml:link`), hər dil üçün düzgün `<html lang>`;
+  - dil seçimi **brauzer dilinə görə avtomatik yönləndirmə etməsin** (axtarış botlarını itirir), yalnız təklif göstərsin və seçimi yadda saxlasın.
+- **Schema və AI faylları dillərə görə:** `Course`, `FAQPage`, `Person`, `EducationalOrganization` hər dildə tərcümə olunmuş `name`, `description`, `inLanguage` ilə. `llms.txt` və `llms-full.txt` **ingilis dilində də** (və ayrıca dil bölmələri ilə) yaradılsın. `sameAs`, `address`, `areaServed` kimi sahələr hər dildə eyni qalsın.
+- **FAQ və bloq:** FAQ hər dildə tam olsun, İngilis FAQ-ı ingilis dilli istifadəçilərin real suallarına uyğun yazılsın (məs. "Are there online marketing courses in Azerbaijan?", "How much does the course cost?"). Bloq yazıları dil üzrə ayrıca saxlanılır; tərcüməsi olmayan yazı həmin dilin siyahısında görünmür.
+- **CMS:** Decap-da hər dil üçün ayrıca məzmun sahələri və ya Decap-ın i18n imkanı; redaktorun hansı dildə nəyin çatışmadığını görməsi üçün sadə göstərici. `src/_data/*.json` strukturunu buna uyğun düşün, mövcud AZ məzmunu pozulmasın.
+- **Platforma:** istifadəçi interfeysi də 3 dildə olsun (dil seçimi hesabda saxlanılır). Dərslərin özü (video) hazırda Azərbaycan dilindədir, bunu qeyd et ki, İngilis və Rus saytda "kurs Azərbaycan dilindədir" aydın yazılsın (aldanan alıcı olmasın).
+- **Keyfiyyət yoxlaması:** hər dilin başlıq uzunluqları, meta təsvirləri, sınıq link yoxlaması, `hreflang` qarşılıqlı uyğunluğu avtomatik testlə yoxlansın.
+
 ### 2.11 Landing ilə əlaqə
 - Landing statik qalır. Platforma ayrıca app olsun, məsələn `app.marketingschool.az` və ya `/platform`.
 - Kurs və modul adları üçün tək həqiqət mənbəyi seç: ya `src/_data/kurslar/*.json`, ya platforma DB-si. İkisinin fərqli olmaması üçün sinxronizasiya və ya import skripti yaz.
@@ -279,7 +299,10 @@ Hesabatda hər tapıntı üçün bunlar yazılsın: risk səviyyəsi, təsvir, n
 - [ ] Videolar birbaşa yüklənmir: imzalı tokenlər, watermark, sessiya limiti var.
 - [ ] Dərs səhifəsi: solda modullar, ortada video və altında tapşırıq paneli. Mobil uyğundur.
 - [ ] Admin paneldən kurs, dərs, tapşırıq, görüş, slot və tələbə idarə olunur.
-- [ ] Bütün UI Azərbaycan dilindədir və landing-in dizayn sisteminə uyğundur.
+- [ ] Landing 3 dildədir (AZ/EN/+üçüncü), menyuda dil seçimi var, `hreflang`, sitemap və schema hər dil üçün düzgündür. İngilis versiya təbii dildə yazılıb və `llms.txt` ingilis dilində də var.
+- [ ] Landing-də hər kurs üçün "99 AZN / ay" yazılıb, hər kurs ayrıca ödənilir.
+- [ ] Demo istifadəçi ödəniş edən kimi eyni hesabla tam kursa keçir (progress qorunur), testlə yoxlanılıb.
+- [ ] Platforma UI 3 dildədir və landing-in dizayn sisteminə uyğundur.
 - [ ] Security audit hesabatı hazırdır, kritik və yüksək riskli tapıntı qalmayıb.
 - [ ] README yenilənib: quraşdırma, `.env.example`, deploy, admin istifadəsi, backup və bərpa.
 - [ ] Lighthouse: performans ≥ 90, əlçatanlıq ≥ 95. Əsas axınlar üçün e2e testlər CI-da işləyir.
