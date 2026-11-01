@@ -8,11 +8,11 @@ Sən Marketing School üçün **onlayn tədris platformasını** quracaqsan. Bu,
 
 ## 0. İşə başlamazdan əvvəl
 1. `README.md`-ni və bütün `src/` qovluğunu oxu. Landing-in necə qurulduğunu, dizayn sistemini və məzmun fayllarını başa düş.
-2. Mənə əvvəlcə bunları təqdim et:
-   - **Arxitektura təklifi**: stack, hosting, video provayderi, verilənlər bazası sxemi, auth axını;
-   - **Mərhələli plan**;
-   - **Aşağıdakı "Açıq qərarlar" bölməsindəki suallar**.
-3. Qərarlar təsdiqlənməmiş böyük kod yazma.
+2. **Bölmə 3-dəki hosting suallarını mənə ver və cavabı gözlə**, sonra mənə bunları təqdim et:
+   - **Arxitektura təklifi**: stack (bölmə 3-dəki qaydaya görə sən seç və əsaslandır), video yanaşması, verilənlər bazası sxemi, auth axını;
+   - **Mərhələli plan**.
+   Bölmə 1b-dəki biznes qərarları **artıq qəbul olunub**, yenidən soruşma.
+3. Arxitektura təklifi təsdiqlənməmiş böyük kod yazma.
 4. Hər mərhələni ayrıca branch və PR ilə təqdim et. `main`-ə birbaşa push etmə.
 5. Heç vaxt sirr (API key, token, parol) commit etmə. Hamısı `.env`-də olsun və `.env.example` ilə sənədləşsin.
 
@@ -41,7 +41,18 @@ Sən Marketing School üçün **onlayn tədris platformasını** quracaqsan. Bu,
   - yığcam düzülüş, çox boşluq yoxdur;
   - yüngül animasiyalar, `prefers-reduced-motion`-a hörmət edilir.
   - CSS dəyişənlərini (`--brand`, `--brand-soft`, `--ink`, `--line`, `--r` və s.) təkrar istifadə et.
-- Qiymət, ödəniş üsulu və videoların uzunluğu hələ məlum deyil. Rəqəm uydurma, yer tutucu qoy.
+- Videoların ümumi uzunluğu və saatı hələ məlum deyil. Rəqəm uydurma, yer tutucu qoy. Qiymət və ödəniş qaydası bölmə 1b-də qəbul edilib.
+
+## 1b. Qəbul olunmuş biznes qərarları (dəyişdirmə)
+- **Qiymət:** aylıq abunə **99 AZN**. Hissə-hissə ödəniş yoxdur. Kurs 3 aylıqdır, tələbə hər ay yenidən ödəyir. Giriş yalnız ödənişi aktiv olan müddət ərzində açıqdır (`paid_until`).
+- **Canlı sual-cavab:** hər ayın **2-ci və 4-cü həftəsinin 6-cı günü (şənbə), saat 11:00 (Asia/Baku)**. Cədvəl sistemdə qaydadan avtomatik yaradılsın, admin hər birini ayrıca dəyişə və ya ləğv edə bilsin. "2-ci və 4-cü həftənin şənbəsi"ni ayın 2-ci və 4-cü şənbəsi kimi qəbul et və bunu mənə yazılı təsdiqlət.
+- **1:1 mentorluq** yalnız tələbə **bütün modulları bitirəndə** açılır (hər modulun bütün dərsləri tamamlanıb).
+- **Diplom:** ev tapşırıqlarının **ballarının cəmi mümkün ümumi balın ≥ 75%-i** olanda. Tapşırığı etməyən 0 bal alır. Diplom üçün ən azı bir tapşırığın göndərilməsi yetərli deyil, yalnız 75% şərti keçərlidir. Bal təlimçi tərəfindən verilir (hər tapşırıq üçün maksimum bal təlimçi təyin edir).
+- **Demo istifadəçi ev tapşırığını heç görmür** (tab da yoxdur, API də 403 qaytarır).
+- **SMS təsdiqi (OTP) yoxdur.** Telefon yalnız toplanır, təsdiqlənmir.
+- **Ödəniş:** Epoint və ya Payriff (bax: 2.10).
+- **Videolar 1080p** olacaq.
+- **Texnologiya seçimi sənindir** (bölmə 3). Layihəni tamamilə AI ilə quracağıq, ona görə seçimi də sən ən təhlükəsiz və ən az xəta ehtimalı olan yola görə et.
 
 ## 2. Qurulacaq funksionallıq
 
@@ -53,6 +64,7 @@ Sən Marketing School üçün **onlayn tədris platformasını** quracaqsan. Bu,
   - `admin`.
 - Qeydiyyat və giriş: e-mail təsdiqi məcburidir. Telefon toplanır (landing-də olduğu kimi məcburi). İstəyə görə SMS OTP.
 - Admin və təlimçilər üçün **2FA məcburidir**.
+- Hər `enrollment`-in statusu: `active`, `past_due` (ödəniş gecikib, qısa güzəşt müddəti, məs. 3 gün, təlimçi və admin dəyişə bilər), `expired`, `canceled`. **Yalnız `active` və güzəşt müddətində olan `past_due` giriş verir.** Bitəndə tələbənin tapşırıqları, balları və tamamlanma qeydləri silinmir, ödəniş bərpa olunanda qaldığı yerdən davam edir.
 - Bütün icazə yoxlamaları **serverdə** aparılsın. UI-da gizlətmək təhlükəsizlik sayılmır.
 
 ### 2.2 Demo axını (1 gün)
@@ -61,7 +73,7 @@ Sən Marketing School üçün **onlayn tədris platformasını** quracaqsan. Bu,
 - **Demoda yalnız ilk 2 modul açıqdır.** Digər modullar siyahıda görünür (ad, qısa təsvir, kilid ikonu, "Kursu alanda açılır"), amma:
   - kilidli dərslərin video tokeni, materialı, tapşırığı **serverdə heç verilmir**;
   - birbaşa URL ilə və ya API sorğusunu dəyişməklə (məs. `lessonId`-ni 3-cü modula dəyişmək) açmaq mümkün olmamalıdır.
-- Demo istifadəçi üçün bunlar **görünmür**: canlı görüş linkləri, 1:1 bölməsi, diplom və tapşırıq göndərmə. Tapşırıq mətnini oxuya bilər; göndərib-göndərməməsi açıq qərardır.
+- Demo istifadəçi üçün bunlar **heç görünmür**: **ev tapşırığı (mətn də, tab da)**, canlı görüş linkləri, 1:1 bölməsi, diplom. Bu hissələr menyuda və UI-da yoxdur, API-lar 403 qaytarır.
 - Sui-istifadə qarşısı:
   - bir e-mail və bir telefon üçün bir demo;
   - birdəfəlik (disposable) e-mailləri blokla;
@@ -69,7 +81,7 @@ Sən Marketing School üçün **onlayn tədris platformasını** quracaqsan. Bu,
   - vaxt yalnız server saatı ilə hesablanır, müştəri saatına etibar edilmir.
 
 ### 2.3 Video izləmə (rahat və yüklənməz)
-- Video provayderi: signed URL və tokenli HLS dəstəkləyən idarə olunan servis, məsələn Mux, Cloudflare Stream və ya Bunny Stream. Seçimi əsaslandır.
+- Video yanaşması bölmə 3-dəki **Variant A/B** qaydasına görə seçilir. Hər iki halda yalnız şifrələnmiş və tokenlə qorunan HLS axını işlənir.
 - **Yükləmənin qarşısını alma**. Tam qarşısını almaq texniki olaraq mümkün deyil (ekran yazısı). Ona görə qatlarla çətinləşdir və bunu mənə açıq yaz:
   - birbaşa MP4 linki yoxdur, yalnız **şifrələnmiş HLS/DASH**;
   - **qısa ömürlü imzalı tokenlər**: 5–15 dəqiqə, istifadəçiyə və dərsə bağlı, serverdə yalnız icazə yoxlandıqdan sonra verilir;
@@ -87,6 +99,25 @@ Sən Marketing School üçün **onlayn tədris platformasını** quracaqsan. Bu,
   - "Növbəti dərs" düyməsi, dərsi "tamamlandı" işarələmək;
   - mobil uyğun, yavaş internetdə adaptiv bitrate.
 
+#### 2.3b 1080p optimallaşdırması (player + kodlaşdırma)
+Məqsəd: video **tez başlasın, donmasın, yavaş internetdə də işləsin**, 1080p isə yalnız bant genişliyi imkan verəndə göstərilsin.
+- **Kodlaşdırma (ffmpeg və ya provayderin preseti):** H.264 High, AAC 128 kbps, 2 saniyəlik keyframe, 4 saniyəlik seqment. Adaptiv keyfiyyət pillələri (təxmini):
+  - 1080p ~4,5 Mbps;
+  - 720p ~2,5 Mbps;
+  - 480p ~1,2 Mbps;
+  - 360p ~0,6 Mbps.
+  Pillələri real kursun videosunda ölç və qərarı əsaslandır. Çıxış tələbi: görünüşün keyfiyyəti vizual itki olmadan, orta faylın ölçüsü isə mümkün qədər kiçik olsun.
+- **Başlanğıc:** player ilk açılışda 720p ilə başlayır və bant genişliyi yaxşıdırsa 1080p-yə qalxır. `Save-Data` başlığı və ya mobil şəbəkədə 1080p avtomatik qadağan edilir, istifadəçi əl ilə seçə bilər.
+- **Player:** yüngül açıq mənbəli player (məsələn Vidstack və ya hls.js + sadə UI). Ağır, yüklənməsi uzun player istifadə etmə. Player kodu yalnız dərs səhifəsində yüklənsin, landing-də yox.
+- **Sürət:**
+  - `preconnect`/`dns-prefetch` video domeninə;
+  - poster şəkli (WebP, kiçik) ilə dərhal görünən səhifə, video isə klik və ya ekrana girəndə yüklənir (lazy);
+  - növbəti dərsin ilk seqmentlərini yalnız cari dərsin sonuna yaxın əvvəlcədən yüklə;
+  - buffer limiti (məs. 30–60 saniyə), mobil yaddaşı şişirtməsin;
+  - kəsilmədən davam etmə (bərpa), şəbəkə düşəndə dostluq mesajı və avtomatik yenidən cəhd.
+- **Ölçmə:** player metrikləri (ilk kadrın gəlmə vaxtı, buffer sayı və müddəti, orta keyfiyyət) toplansın, admin paneldə görünsün. Şəxsi məlumat yazılmasın.
+- **Hədəflər:** ilk kadr < 2,5 san (orta bağlantıda), dərs səhifəsində Lighthouse performans ≥ 90, video ilə birlikdə Cumulative Layout Shift ≈ 0.
+
 ### 2.4 Dərs səhifəsinin düzülüşü
 - Masaüstü:
   - **solda** modul və dərs siyahısı: progress, kilidlər, tamamlanma işarələri;
@@ -102,12 +133,13 @@ Sən Marketing School üçün **onlayn tədris platformasını** quracaqsan. Bu,
   - Ölçü limiti var; tip yoxlaması MIME və məzmunla aparılır, yalnız uzantı ilə yox.
   - Antivirus yoxlaması aparılır.
   - Fayllar **private storage**-da saxlanır və yalnız sahibi ilə təlimçi qısa ömürlü link ilə açır.
-- Statuslar: `göndərilməyib → göndərildi → yoxlanılır → qəbul edildi / düzəliş lazımdır`.
+- Statuslar: `göndərilməyib → göndərildi → yoxlanılır → qiymətləndirildi` (və ya `düzəliş lazımdır`).
+- **Hər tapşırığın maksimum balı var.** Təlimçi bal və rəy yazır. Tələbənin kursda topladığı bal və faiz (diplom üçün 75% hədd) həmişə dərs səhifəsində və profildə görünür.
 - Təlimçi rəyi yazır, tələbə bildiriş alır (e-mail və platformada).
 - Tapşırıqlar canlı görüşlərdə müzakirə olunur. Təlimçi görüş üçün seçilmiş tapşırıqları işarələyə bilsin.
 
 ### 2.6 Canlı sual-cavab (2 həftədən bir)
-- Təlimçi görüşləri planlayır: tarix və saat **Asia/Baku**, Zoom/Meet linki.
+- Görüşlər bölmə 1b-dəki qayda ilə avtomatik yaranır (ayın 2-ci və 4-cü həftəsinin şənbəsi, 11:00 Asia/Baku). Təlimçi hər görüşə Zoom/Meet linki əlavə edir, tarixi dəyişə və ya ləğv edə bilər.
 - Yalnız **ödənişli tələbələr**:
   - görüş linkini görür (link serverdə qorunur);
   - əvvəlcədən sual göndərə bilir;
@@ -117,13 +149,13 @@ Sən Marketing School üçün **onlayn tədris platformasını** quracaqsan. Bu,
 ### 2.7 1:1 mentorluq — təqvimlə
 - **Kursu almayanlar bu bölməni ümumiyyətlə görməsin**: menyuda yoxdur, API 403 qaytarır. Demo istifadəçilər də görmür.
 - Təlimçi admin paneldə boş vaxtlarını (slotları) təqvimdə təyin edir.
-- Tələbə **bir sessiya** rezerv edir. Bölmə kursun sonunda açılır; unlock şərti açıq qərardır (aşağıya bax).
+- Tələbə **bir sessiya** rezerv edir. Bölmə yalnız **bütün modullar bitəndə** açılır (hər modulun bütün dərsləri tamamlanıb).
 - Rezerv: təsdiq e-maili, `.ics`, görüş linki, xatırlatmalar, ləğv və vaxt dəyişmə qaydası (məs. 24 saat əvvələdək).
 - Eyni slotu iki nəfər tuta bilməz: verilənlər bazasında unikal məhdudiyyət və tranzaksiya. Race condition testi yaz.
 - İstəyə görə Cal.com embed və ya öz slot cədvəlin. Seçimi əsaslandır.
 
 ### 2.8 Diplom
-- Şərt: bütün modullar tamamlanıb və bütün tapşırıqlar "qəbul edildi"; dəqiq şərti təsdiqlət.
+- Şərt: tapşırıqların bal cəmi ≥ 75% (bölmə 1b). Tapşırığı etməyən 0 bal alır. Şərt ödənilən kimi diplom avtomatik yaranır və tələbə yükləyə bilir.
 - Avtomatik PDF diplom: ad, kurs, tarix, təlimçi və **unikal yoxlama ID-si**.
 - Açıq yoxlama səhifəsi `/diplom/{id}`: yalnız ad, kurs və tarix göstərir, şəxsi məlumat yoxdur. LinkedIn-ə əlavə linki.
 
@@ -137,10 +169,16 @@ Sən Marketing School üçün **onlayn tədris platformasını** quracaqsan. Bu,
 - Tapşırıqların yoxlanması növbəsi, canlı görüşlərin və 1:1 slotlarının idarəsi.
 - Audit log: kim, nə vaxt, nəyi dəyişdi.
 
-### 2.10 Ödəniş (mərhələli)
-- **Mərhələ 1**: admin enrollment-i əl ilə aktivləşdirir.
-- **Mərhələ 2**: Azərbaycan ödəniş provayderi ilə inteqrasiya. Variantları araşdır, mənə təklif et.
-  - Webhook imzası yoxlanılmalı, idempotent olmalı, məbləğ serverdə hesablanmalıdır.
+### 2.10 Ödəniş (aylıq 99 AZN)
+- Provayder: **Epoint** və ya **Payriff**. İlk addım: hər ikisinin rəsmi sənədlərini oxu və mənə cədvəllə təqdim et:
+  - təkrarlanan (avtomatik aylıq) ödəniş və ya kart tokenizasiyası dəstəyi;
+  - webhook və imza yoxlaması;
+  - komissiya;
+  - geri qaytarma və sınaq mühiti.
+  Avtomatik aylıq çıxarış dəstəklənmirsə, ehtiyat axın qur: hər ay ödəniş tarixindən 5 gün əvvəl e-mail ilə ödəniş linki göndərilir.
+- Tələbə ödəyəndə `paid_until` bir ay uzanır. Ödəniş alınmayanda status `past_due`, güzəşt müddəti bitəndə `expired` olur. Bütün keçidlər serverdə və webhook ilə aparılır.
+- Təhlükəsizlik: webhook imzası yoxlanılmalı, idempotent olmalı, məbləğ serverdə hesablanmalı, enrollment yalnız təsdiqlənmiş ödənişdən sonra açılmalıdır.
+- **Mərhələ 1:** admin enrollment-i əl ilə aktivləşdirir. **Mərhələ 2:** onlayn ödəniş.
 
 ### 2.11 Landing ilə əlaqə
 - Landing statik qalır. Platforma ayrıca app olsun, məsələn `app.marketingschool.az` və ya `/platform`.
@@ -152,15 +190,34 @@ Sən Marketing School üçün **onlayn tədris platformasını** quracaqsan. Bu,
 - Məxfilik siyasəti və istifadə şərtləri səhifələri (yer tutucu mətnlə; hüquqi mətni sahibi təsdiqləyəcək).
 - Azərbaycanın "Fərdi məlumatlar haqqında" Qanununa uyğun minimal məlumat toplama, açıq razılıq, hesabın silinməsi və məlumatların ixracı imkanı.
 
-## 3. Açıq qərarlar — başlamazdan əvvəl məndən soruş
-1. Stack: məsələn Next.js + Supabase (Postgres + RLS + Auth + Storage) və ya alternativ. Hosting, aylıq xərc təxmini.
-2. Video provayderi və DRM lazımdırmı (büdcə).
-3. Kursa giriş müddəti: 3 ay, 1 il, ömürlük?
-4. 1:1 bölməsi nə vaxt açılır: son ayda, müəyyən progress faizindən sonra, yoxsa bütün tapşırıqlar qəbul olunanda?
-5. Demo istifadəçi ev tapşırığını görsün, yoxsa göndərə də bilsin?
-6. Telefon üçün SMS OTP istifadə olunsunmu (xərc)?
-7. Ödəniş provayderi və hissə-hissə ödəniş.
-8. Diplomun dəqiq şərti.
+## 3. Texnologiya və hosting (əvvəl soruş, sonra seç)
+Sistem **hostinq alınıb orada** qurulacaq. Bu, seçimi birbaşa təyin edir, ona görə işə başlamazdan əvvəl **mənə bu sualları ver və cavabı gözlə**:
+1. Hostinqin növü: paylaşılan (cPanel), VPS, yoxsa ayrıca server? Provayder və plan.
+2. Əməliyyat sistemi, Node.js / PHP / Python versiyaları, **SSH girişi**, cron, Docker və `ffmpeg` mövcudluğu.
+3. CPU, RAM, disk, aylıq bant genişliyi limiti, eyni vaxtda neçə bağlantı.
+4. Verilənlər bazası: MySQL, PostgreSQL və ya SQLite? Avtomatik backup var?
+5. Domen və SSL: `app.marketingschool.az` və ya `/platform`.
+
+**Seçim qaydası (sən qərar ver, əsaslandır):**
+- **Paylaşılan hostinq (cPanel, yalnız PHP + MySQL):** Laravel. Node/Next.js bura düşmür.
+- **VPS və ya ayrıca server (SSH var):** Next.js (və ya Laravel) + PostgreSQL, Nginx, **Docker Compose** ilə.
+- Verilənlər bazası və auth səviyyəsində demo məhdudiyyətinin ("yalnız 2 modul") pozulmaması vacibdir. Çərçivə nə olursa olsun, icazələr mərkəzi **policy/gate** qatında yazılsın və testlə yoxlansın.
+- Çox mürəkkəb, qeyri-adi və az dəstəklənən texnologiyadan qaç. Layihə tamamilə AI köməyi ilə aparılacaq, buna görə geniş yayılmış, sənədləşməsi yaxşı və təhlükəsiz standartları olan stack seç.
+
+**Video yanaşması (hostinqə görə seç):**
+- **Variant A (tövsiyə olunur): tətbiq hostinqdədir, videolar xüsusi video xidmətində.** Məsələn Bunny Stream (ucuzdur, tokenli HLS, əsas DRM). Səbəb: adi hostinqdə 1080p video yayımlamaq bant genişliyini və CPU-nu tez tükədir, eyni vaxtda çox tələbə olanda sayt çökə bilər, və yükləmədən qorumaq çətindir.
+- **Variant B: videolar da öz serverindədir.** Yalnız güclü VPS və ya ayrıca serverdə mümkündür:
+  - videoları ffmpeg ilə HLS-ə çevir (2.3b);
+  - seqmentləri **şifrələ** (AES-128) və açarı yalnız icazə yoxlanılandan sonra qısa ömürlü token ilə ver;
+  - Nginx `secure_link` və ya eyni məntiqlə imzalı URL-lər;
+  - **CDN** (məsələn Bunny CDN) önündə olsun ki, server yüklənməsin;
+  - bant genişliyi və maliyyə hesabı çıxar.
+  Bu variantı seçirsənsə, risk və xərci mənə açıq yaz.
+- Hostinq paylaşılan olarsa, yalnız Variant A mümkündür.
+
+## 3b. Hələ açıq qalan məsələlər
+- Ödəniş provayderinin son seçimi (Epoint və ya Payriff, 2.10-un nəticəsinə görə).
+- `past_due` güzəşt müddəti (təklif: 3 gün) və ödəniş dayandıqda diplom hüququnun saxlanması (təklif: qazanılmış diplom həmişə qalır).
 
 ## 4. Bitəndə: Security audit (məcburi)
 Bütün funksionallıq bitəndən sonra tam audit et, tapılanları düzəlt və hesabat yaz (`docs/security-audit.md`). OWASP Top 10 və OWASP ASVS Level 2 əsas götürülsün. Minimum yoxlanacaqlar:
@@ -215,7 +272,11 @@ Hesabatda hər tapıntı üçün bunlar yazılsın: risk səviyyəsi, təsvir, n
 ## 5. Hazırdır demək üçün şərtlər (Definition of Done)
 - [ ] Demo: qeydiyyat → 24 saat → yalnız 2 modul açıq → vaxt bitəndə bağlanır. Hamısı testlə yoxlanılıb.
 - [ ] Ödənişli tələbə bütün modulları, tapşırıqları, canlı görüşləri, 1:1 rezervi və diplomu istifadə edə bilir.
-- [ ] Kursu almayanlar 1:1 bölməsini görmür və API 403 qaytarır.
+- [ ] Kursu almayanlar 1:1 bölməsini görmür və API 403 qaytarır. 1:1 yalnız bütün modullar bitəndə açılır.
+- [ ] Demo istifadəçi ev tapşırığını heç görmür (UI və API).
+- [ ] Diplom yalnız bal cəmi ≥ 75% olanda verilir. Sərhəd halları (74,9% / 75%) testlə yoxlanılıb.
+- [ ] Ödəniş: aylıq 99 AZN, `paid_until` məntiqi, `past_due` və `expired` keçidləri və webhook testləri.
+- [ ] 1080p video: adaptiv pillələr, 720p ilə başlanğıc, ilk kadr < 2,5 san, mobil məlumat qənaəti rejimi.
 - [ ] Videolar birbaşa yüklənmir: imzalı tokenlər, watermark, sessiya limiti var.
 - [ ] Dərs səhifəsi: solda modullar, ortada video və altında tapşırıq paneli. Mobil uyğundur.
 - [ ] Admin paneldən kurs, dərs, tapşırıq, görüş, slot və tələbə idarə olunur.
