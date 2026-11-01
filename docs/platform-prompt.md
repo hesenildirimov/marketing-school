@@ -81,7 +81,7 @@ Sən Marketing School üçün **onlayn tədris platformasını** quracaqsan. Bu,
   - vaxt yalnız server saatı ilə hesablanır, müştəri saatına etibar edilmir.
 
 ### 2.3 Video izləmə (rahat və yüklənməz)
-- Video yanaşması bölmə 3-dəki **Variant A/B** qaydasına görə seçilir. Hər iki halda yalnız şifrələnmiş və tokenlə qorunan HLS axını işlənir.
+- Video **Bunny Stream** üzərindədir (bölmə 3). Yalnız şifrələnmiş və tokenlə qorunan HLS axını işlənir.
 - **Yükləmənin qarşısını alma**. Tam qarşısını almaq texniki olaraq mümkün deyil (ekran yazısı). Ona görə qatlarla çətinləşdir və bunu mənə açıq yaz:
   - birbaşa MP4 linki yoxdur, yalnız **şifrələnmiş HLS/DASH**;
   - **qısa ömürlü imzalı tokenlər**: 5–15 dəqiqə, istifadəçiyə və dərsə bağlı, serverdə yalnız icazə yoxlandıqdan sonra verilir;
@@ -204,16 +204,15 @@ Sistem **hostinq alınıb orada** qurulacaq. Bu, seçimi birbaşa təyin edir, o
 - Verilənlər bazası və auth səviyyəsində demo məhdudiyyətinin ("yalnız 2 modul") pozulmaması vacibdir. Çərçivə nə olursa olsun, icazələr mərkəzi **policy/gate** qatında yazılsın və testlə yoxlansın.
 - Çox mürəkkəb, qeyri-adi və az dəstəklənən texnologiyadan qaç. Layihə tamamilə AI köməyi ilə aparılacaq, buna görə geniş yayılmış, sənədləşməsi yaxşı və təhlükəsiz standartları olan stack seç.
 
-**Video yanaşması (hostinqə görə seç):**
-- **Variant A (tövsiyə olunur): tətbiq hostinqdədir, videolar xüsusi video xidmətində.** Məsələn Bunny Stream (ucuzdur, tokenli HLS, əsas DRM). Səbəb: adi hostinqdə 1080p video yayımlamaq bant genişliyini və CPU-nu tez tükədir, eyni vaxtda çox tələbə olanda sayt çökə bilər, və yükləmədən qorumaq çətindir.
-- **Variant B: videolar da öz serverindədir.** Yalnız güclü VPS və ya ayrıca serverdə mümkündür:
-  - videoları ffmpeg ilə HLS-ə çevir (2.3b);
-  - seqmentləri **şifrələ** (AES-128) və açarı yalnız icazə yoxlanılandan sonra qısa ömürlü token ilə ver;
-  - Nginx `secure_link` və ya eyni məntiqlə imzalı URL-lər;
-  - **CDN** (məsələn Bunny CDN) önündə olsun ki, server yüklənməsin;
-  - bant genişliyi və maliyyə hesabı çıxar.
-  Bu variantı seçirsənsə, risk və xərci mənə açıq yaz.
-- Hostinq paylaşılan olarsa, yalnız Variant A mümkündür.
+**Video: qəbul olunmuş qərar.** Videolar **ayrıca video xidmətindədir, şərti olaraq Bunny Stream** (tokenli HLS, referer məhdudiyyəti, əsas DRM). Tətbiq hostinqdə qalır. Videoları öz hostinqində yayımlama.
+- Video qatını bir **adapter** (kiçik interfeys: yüklə, imzalı playback URL ver, sil) arxasında yaz ki, provayderi sonradan dəyişmək asan olsun. Bunny-yə bağlı kod yalnız bu adapterdə olsun.
+- Bunny-nin `Authentication Key`, `Library ID` kimi dəyərləri yalnız server `.env`-ində saxlanır.
+
+**Texnologiyanın yazılması: qaydalar**
+- Bütün sistemi **özün yaz**: giriş (auth), icazələr, fayl yükləmə, e-mail göndərmə, admin panel, təqvim və rezervasiya, diplom PDF-i, ödəniş inteqrasiyası. **Əlavə pullu xidmətə, SaaS-a və ya xarici platformaya (Supabase, Firebase, Auth0, Cal.com, Calendly, Zapier, hazır LMS və s.) məcbur etmə.**
+- İcazə verilən yeganə xarici xidmətlər: **Bunny Stream** (video), **Epoint/Payriff** (ödəniş), **SMTP** (e-mail, hostinqin öz SMTP-si və ya adi SMTP) və canlı görüş üçün **Zoom/Google Meet linki** (əl ilə və ya sadə link). Başqa xidmət lazım görürsənsə, əvvəlcə mənə səbəbi və pulsuz alternativi yaz, razılıq almadan əlavə etmə.
+- Açıq mənbəli, pulsuz kitabxanalardan istifadə etmək olar (yoxlanılmış, aktiv saxlanılan və lisenziyası uyğun olanlar). Hər kitabxana üçün `npm audit`/`composer audit` yoxlansın.
+- Hər şey tək hostinq və öz verilənlər bazası ilə işləməlidir. Tətbiq `.env` ilə konfiqurasiya olunur, quraşdırma və deploy addımları README-də olsun.
 
 ## 3b. Hələ açıq qalan məsələlər
 - Ödəniş provayderinin son seçimi (Epoint və ya Payriff, 2.10-un nəticəsinə görə).
