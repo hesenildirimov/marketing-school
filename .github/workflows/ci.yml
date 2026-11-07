@@ -19,7 +19,7 @@ jobs:
         ports: ["3310:3310"]
     defaults: { run: { working-directory: platform } }
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: shivammathur/setup-php@v2
         with: { php-version: "8.4", extensions: "pdo_pgsql, intl, zip, gd, bcmath, sockets, pcntl", coverage: none }
       - run: composer install --no-interaction --prefer-dist
@@ -37,7 +37,7 @@ jobs:
   landing:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm }
       - run: npm ci
@@ -56,7 +56,7 @@ jobs:
         ports: ["5432:5432"]
         options: --health-cmd "pg_isready -U postgres" --health-interval 5s --health-retries 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: shivammathur/setup-php@v2
         with: { php-version: "8.4", extensions: "pdo_pgsql, intl, zip, gd, bcmath, sockets, pcntl", coverage: none }
       - uses: actions/setup-node@v4
@@ -76,7 +76,7 @@ jobs:
     runs-on: ubuntu-24.04
     permissions: { contents: read, security-events: write }
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with: { fetch-depth: 0 }
       - name: Secret scanning (gitleaks, bütün tarixçə)
         uses: gitleaks/gitleaks-action@v2
