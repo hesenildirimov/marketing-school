@@ -1,5 +1,5 @@
 # Marketing School platforması — PHP-FPM imici (app, worker, scheduler eyni imicdən)
-FROM node:22-alpine AS assets
+FROM node:25-alpine AS assets
 WORKDIR /build
 COPY platform/package.json platform/package-lock.json ./
 RUN npm ci --ignore-scripts && mkdir -p out && cp node_modules/hls.js/dist/hls.light.min.js out/
