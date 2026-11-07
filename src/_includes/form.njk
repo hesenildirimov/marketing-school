@@ -1,24 +1,29 @@
+{#- Pulsuz demo forması → platformanın POST /platform/api/demo/register endpoint-i (bölmə 2.12).
+    Netlify Forms bu axından çıxarılıb (iki mənbədə təkrar qeyd yaranmasın). Eyni origin: CORS lazım deyil.
+    Uğurdan sonra istifadəçi platformanın "E-mailinizi yoxlayın" səhifəsinə seçdiyi dildə yönləndirilir. -#}
+{%- set lang = lang or "az" -%}{%- set L = loc[lang] -%}{%- set u = L.ui -%}
 <section id="muraciet">
   <div class="wrap">
     <div class="cta-info">
-    <h2>{{ formTitle or site.form.title }}</h2>
-    <p class="lede">{{ formLede or site.form.lede }}</p>
-    <ul class="tick cta-list">{% for b in site.form.benefits %}<li>{{ b }}</li>{% endfor %}</ul>
+    <h2>{{ formTitle or L.site.form.title }}</h2>
+    <p class="lede">{{ formLede or L.site.form.lede }}</p>
+    <ul class="tick cta-list">{% for b in L.site.form.benefits %}<li>{{ b }}</li>{% endfor %}</ul>
     </div>
-    <form name="muraciet" method="POST" data-netlify="true" action="{{ 'tesekkur' | link }}">
-      <input type="hidden" name="form-name" value="muraciet">
-      <input type="hidden" name="sehife" value="{{ slug or 'ana-sehife' }}">
-      <p hidden><label>Bot yoxlaması <input name="bot-field"></label></p>
-      <label for="ad">Ad və soyad</label>
-      <input id="ad" name="ad" type="text" autocomplete="name" required>
-      <label for="email">E-mail</label>
+    <form name="demo" method="POST" action="/platform/api/demo/register" data-demo-form>
+      <input type="hidden" name="lang" value="{{ lang }}">
+      <input type="hidden" name="ts" value="">
+      <p hidden><label>Bot <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label for="ad">{{ u.form_name }}</label>
+      <input id="ad" name="ad" type="text" autocomplete="name" maxlength="120" required>
+      <label for="email">{{ u.form_email }}</label>
       <input id="email" name="email" type="email" autocomplete="email" required>
-      <label for="kurs">Maraqlandığınız kurs</label>
-      <select id="kurs" name="kurs">{% for c in courses %}<option value="{{ c.slug }}"{% if c.slug == slug %} selected{% endif %}>{{ c.name }}</option>{% endfor %}<option value="her-ikisi">Hər ikisi</option></select>
-      <label for="tel">Əlaqə nömrəsi</label>
-      <input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" placeholder="+994 50 000 00 00" pattern="[+0-9 ()\-]{9,20}" title="Əlaqə nömrəsini daxil edin, məs: +994 50 000 00 00" required>
-      <div class="btns"><button class="btn" type="submit">{{ site.form.button }}</button></div>
-      <p class="hint">{{ site.form.consent }}</p>
+      <label for="kurs">{{ u.form_course }}</label>
+      <select id="kurs" name="kurs" required>{% for c in L.courses %}<option value="{{ c.slug }}"{% if c.slug == (slugForForm or (p.key if p else '')) %} selected{% endif %}>{{ c.name }}</option>{% endfor %}</select>
+      <label for="tel">{{ u.form_phone }}</label>
+      <input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" placeholder="+994 50 000 00 00" pattern="[+0-9 ()\-]{9,20}" title="{{ u.form_phone_title }}" required>
+      <label class="consent"><input type="checkbox" name="consent" value="1" required> <span>{{ L.site.form.consent }} <a href="/platform/legal/privacy?lang={{ lang }}">{{ u.privacy }}</a></span></label>
+      <div class="btns"><button class="btn" type="submit">{{ L.site.form.button }}</button></div>
+      <p class="hint">{{ L.site.form.once_note }}</p>
     </form>
   </div>
 </section>

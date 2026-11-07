@@ -1,0 +1,37 @@
+{
+  "alternate_names": [
+    "Marketing School Azerbaijan",
+    "Marketing School Baku"
+  ],
+  "tagline": "Online marketing and digital marketing courses from Azerbaijan, taught in Azerbaijani.",
+  "description": "Marketing School is an online school in Baku, Azerbaijan, offering two 3-month courses taught in Azerbaijani: the Marketing Course and the Digital Marketing Course. Recorded video lessons, live Q&A twice a month, case-based homework, one-to-one mentoring and a diploma. Each course costs 99 AZN per month. Free demo: 24-hour access to the first 2 modules.",
+  "city": "Baku",
+  "knows_about": [
+    "Marketing strategy",
+    "Digital marketing",
+    "Social media marketing (SMM)",
+    "SEO",
+    "Google Ads",
+    "Meta Ads",
+    "Google Analytics 4",
+    "Brand management",
+    "Marketing research"
+  ],
+  "form": {
+    "title": "Try the course free for 24 hours",
+    "lede": "Fill in the form to unlock the first 2 modules of the course you choose for 24 hours. Watch the lessons and see the format for yourself. Please note: the course is taught in Azerbaijani.",
+    "benefits": [
+      "24-hour free access to the first 2 modules",
+      "Your progress and notes are saved",
+      "Price: 99 AZN per month, per course",
+      "Continue with the same account after you pay"
+    ],
+    "button": "Get free access",
+    "consent": "I agree to my data being processed to provide demo access and to contact me about the course.",
+    "once_note": "The demo is available once per person: 24-hour access to the first 2 modules of one course. Video lessons are in Azerbaijani."
+  },
+  "thanks": {
+    "title": "Thank you — check your inbox",
+    "text": "We have emailed you an access link. Open it, set a password and start your 24-hour free demo."
+  }
+}

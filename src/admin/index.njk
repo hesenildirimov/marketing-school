@@ -15,7 +15,8 @@ eleventyExcludeFromCollections: true
 window.CMS_MANUAL_INIT = true;
 window.repoFiles = {{ cms.demoFiles | json | safe }};
 </script>{% endif %}
-<script src="https://unpkg.com/decap-cms@3.16.3/dist/decap-cms.js"></script>
+<!-- SRI: /platform ilə eyni origin-dir — xarici skript dəyişdirilsə brauzer onu icra etmir (docs/security-audit.md) -->
+<script src="https://unpkg.com/decap-cms@3.16.3/dist/decap-cms.js" integrity="sha384-A/Gdn928CNLufmnGWGs9RM4Q9o8bSNLeJERqBFrBjwzL7FRpoLT3MPF8Tl0+Wd2p" crossorigin="anonymous"></script>
 <script>
 CMS.registerPreviewStyle("{{ 'style.css' | asset if not demo else '../style.css' }}");
 CMS.registerPreviewStyle("body{padding:24px 28px;max-width:760px}", { raw: true });

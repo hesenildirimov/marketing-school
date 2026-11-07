@@ -1,16 +1,16 @@
 ---
-permalink: rss.xml
+pagination: { data: langs, size: 1, alias: lang }
 eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-<title>{{ site.name }} Bloqu</title>
-<link>{{ 'bloq' | abs }}</link>
-<atom:link href="{{ siteUrl }}/rss.xml" rel="self" type="application/rss+xml"/>
-<description>{{ blog.seo_description }}</description>
-<language>az</language>
-{%- for p in collections.posts %}
+<title>{{ loc[lang].ui.rss_title }}</title>
+<link>{{ routes.blog[lang] | abs }}</link>
+<atom:link href="{{ siteUrl }}/{{ '' if lang == 'az' else lang + '/' }}rss.xml" rel="self" type="application/rss+xml"/>
+<description>{{ loc[lang].blog.seo_description }}</description>
+<language>{{ lang }}</language>
+{%- for p in collections["posts_" + lang] %}
 <item><title>{{ p.data.title }}</title><link>{{ p.data.slug | abs }}</link><guid>{{ p.data.slug | abs }}</guid><pubDate>{{ p.date | rfc822 }}</pubDate><description>{{ p.data.description }}</description></item>
 {%- endfor %}
 </channel>

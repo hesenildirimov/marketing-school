@@ -1,7 +1,50 @@
 # Marketing School — marketingschool.az
 
-Azərbaycan dilində onlayn marketinq və rəqəmsal marketinq kurslarının landing saytı.
-Statik sayt ([Eleventy](https://www.11ty.dev/)) + [Decap CMS](https://decapcms.org/). Framework yoxdur, əsas səhifələrdə JS yoxdur (yalnız ~0.6 KB scroll-animasiya skripti `src/_includes/base.njk`-in sonunda).
+Onlayn marketinq və rəqəmsal marketinq kursları. Repo iki hissədən ibarətdir:
+
+| Hissə | Nədir | Harada işləyir |
+|---|---|---|
+| **Landing** (`src/`) | Statik sayt ([Eleventy](https://www.11ty.dev/)) + [Decap CMS](https://decapcms.org/), AZ/EN/RU | Netlify |
+| **Platforma** (`platform/`) | Laravel 13 + PostgreSQL (RLS): demo, video dərslər (Bunny Stream), tapşırıqlar, canlı dərslər, mentorluq, diplom, ödəniş (Epoint), admin panel | VPS (Docker Compose), `marketingschool.az/platform` (Netlify imzalı proxy) |
+
+Sənədlər: [arxitektura](docs/architecture.md) · [əməliyyatlar / deploy / go-live](docs/operations.md) ·
+[backup və bərpa](docs/backup-restore.md) · [təhlükəsizlik auditi](docs/security-audit.md) · [performans](docs/performance.md) ·
+[ödəniş provayderləri](docs/payment-providers.md) · [ilkin tapşırıq](docs/platform-prompt.md)
+
+## Platforma — qısa başlanğıc
+```bash
+# PostgreSQL 16+ (lokal). Rollar: ms_owner (miqrasiya), ms_app (veb, RLS-ə tabe), ms_worker, ms_backup
+sudo -u postgres DB_NAME=ms_dev OWNER_PASSWORD=owner APP_PASSWORD=app WORKER_PASSWORD=worker BACKUP_PASSWORD=backup deploy/postgres/init-roles.sh
+cd platform && composer install && npm install && npm run vendor
+cp .env.example .env && php artisan key:generate     # DB_*; lokalda PROXY_REQUIRE_SIGNATURE=false, SESSION_SECURE_COOKIE=false
+php artisan migrate --database=pgsql_owner
+php artisan platform:dev-seed                        # nümunə kurslar + admin/teacher/student/demo@example.test (parol Secret12345)
+php artisan serve                                    # http://localhost:8000/platform
+php artisan platform:work                            # ayrı terminalda: outbox + e-mail növbəsi
+```
+Bütün ayarlar `platform/.env.example`-da (tətbiq) və `deploy/.env.example`-da (Docker Compose) sənədləşdirilib. Real sirlər yalnız serverdə.
+
+**Deploy (VPS):** `IMAGE_TAG=$(git rev-parse --short HEAD) ./deploy/deploy.sh` — backup → miqrasiya → konteynerlər → health-check, uğursuzluqda
+avtomatik rollback. İlk quraşdırma, staging, rollback planı və go-live yoxlama siyahısı: [`docs/operations.md`](docs/operations.md).
+
+**Admin:** `/platform/admin` (admin və təlimçilər üçün 2FA məcburi). Hesab: `php artisan platform:user:create <email> "<ad>" --role=admin|instructor`.
+
+**Backup:** gündəlik şifrələnmiş (`age`) `pg_dump` + fayllar, `deploy/backup/{backup,restore,verify-restore}.sh` — [`docs/backup-restore.md`](docs/backup-restore.md).
+
+## Testlər
+```bash
+cd platform && php artisan test && vendor/bin/pint --test   # ~185 test, real PostgreSQL (ms_test), RLS daxil
+npm test                                                     # landing: build + i18n yoxlaması + 14 test
+e2e/run.sh                                                   # Playwright: demo axını, admin 2FA, tələbə izolyasiyası (ms_e2e DB)
+```
+CI: `.github/workflows/ci.yml` (platform, landing, e2e, təhlükəsizlik skanları).
+
+---
+
+# Landing
+
+Framework yoxdur, əsas səhifələrdə JS yoxdur (yalnız kiçik scroll-animasiya və forma skripti `src/assets/site.js`).
+Dillər: AZ (kök), EN (`/en/`), RU (`/ru/`) — tərcümələr `src/_data/i18n/{en,ru}/`, marşrutlar `src/_includes/routes-map.js`.
 
 ## Başlamaq
 ```bash
@@ -39,15 +82,15 @@ npm run demo       # _demo/ — düz .html fayllar + admin test rejimi (CMS demo
 - Bloq yazısında kursa link: `[Rəqəmsal Marketinq Kursu](kurs:digital-marketinq-kursu)`.
 
 ## Yayına çıxarma
-`netlify.toml` hazırdır (build: `npm run build`, publish: `_site`, www→apex və http→https yönləndirmələri). Netlify-da repo-nu qoşmaq kifayətdir. Forma `data-netlify="true"` ilə Netlify Forms-a düşür (Netlify → Forms).
+`netlify.toml` hazırdır (build: `npm run build`, publish: `_site`, www→apex və http→https yönləndirmələri). Netlify-da repo-nu qoşmaq kifayətdir. Demo forması platformaya (`/platform/demo`) göndərilir; `/platform/*` Netlify-da imzalı proxy ilə VPS-ə yönləndirilir (`PLATFORM_PROXY_SECRET`, bax `docs/operations.md`).
 
 ## Hələ edilməli işlər
-- [ ] **Qiymət**, **telefon**, **ünvan**, **e-mail** — boşdur, `kurslar/*.json` (`price`) və `site.json`-da doldurulanda schema (`offers`, `address`) və səhifələrdə avtomatik görünür.
-- [ ] **Pulsuz demo dərs**: forma hələ yalnız e-mail/telefon toplayır. Platforma hazır olanda 1 günlük giriş məlumatının göndərilməsi (Netlify Forms bildirişi → e-mail, və ya platformaya inteqrasiya) qurulmalıdır. Telefon sahəsi məcburidir (`src/_includes/form.njk`).
-- [ ] Kurs modullarının və videodərslərin saatı/sayı dəqiqləşəndə `kurslar/*.json`-a əlavə edilməlidir (indi uydurma rəqəm yoxdur).
-- [ ] Təlimçi mətnləri (`instructor.highlights`) LinkedIn profillərindən götürülüb — dərc etməzdən əvvəl təlimçilər təsdiq etməlidir (şirkət adlarının açıq yazılması daxil).
+- [ ] **Telefon**, **ünvan**, **e-mail** — `site.json`-da doldurulanda schema və səhifələrdə avtomatik görünür. Qiymət: `kurslar/*.json` (`price`/`currency`, hazırda 99 AZN) — platformadakı qiymət admin paneldən idarə olunur, `platform:courses:import` sinxron saxlayır.
+- [ ] Kurs modullarının və videodərslərin saatı/sayı dəqiqləşəndə `kurslar/*.json`-a əlavə edilməlidir (uydurma rəqəm yoxdur).
+- [ ] Təlimçi mətnləri (`instructor.highlights`) LinkedIn profillərindən götürülüb — dərc etməzdən əvvəl təlimçilər təsdiq etməlidir.
+- [ ] EN/RU tərcümələri dərcdən əvvəl dil daşıyıcısı tərəfindən redaktə olunmalıdır; boş sahələr CMS-də `/admin/tercume/` səhifəsində görünür.
 - [ ] `og.png` (paylaşım şəkli) sadə hazırlanıb — dizayner variantı ilə əvəz oluna bilər (1200×630).
-- [ ] Bloq: ilk 5 yazı planı — "digital marketinq nədir", "SMM nədir", "Google Ads necə öyrənilir" və s. (SEO/GEO üçün ən böyük təsir buradan gəlir).
+- [ ] Platformanın go-live yoxlama siyahısı (Bunny, Epoint, SMTP, DNS, proxy): [`docs/operations.md`](docs/operations.md) bölmə 7.
 
 ## Dizayn qaydaları
 - Əsas rəng sarı (`--brand` və s., `style.css`-in yuxarısı və sonundakı "Sarı mono palitra" bölməsi). Vurğular sarı/tünd; yeni rəng əlavə etməyin.

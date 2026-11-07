@@ -3,12 +3,12 @@ permalink: sitemap.xml
 eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-{%- set fixed = [["", site.updated], ["marketinq-kursu", courses[0].updated], ["digital-marketinq-kursu", courses[1].updated], ["faq", faq.updated], ["bloq", (collections.posts[0].date | ymd) if collections.posts.length else site.updated]] %}
-{%- for f in fixed %}
-<url><loc>{{ f[0] | abs }}</loc><lastmod>{{ f[1] }}</lastmod></url>
-{%- endfor %}
-{%- for p in collections.posts %}
-<url><loc>{{ p.data.slug | abs }}</loc><lastmod>{{ (p.data.updated or p.date) | ymd }}</lastmod></url>
-{%- endfor %}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+{%- set groups = [[routes.home, loc.az.site.updated], [routes.course['marketinq-kursu'], loc.az.courses[0].updated], [routes.course['digital-marketinq-kursu'], loc.az.courses[1].updated], [routes.faq, loc.az.faq.updated], [routes.blog, (collections.posts_az[0].date | ymd) if collections.posts_az.length else loc.az.site.updated]] %}
+{%- for g in groups %}{% for l in langs %}
+<url><loc>{{ g[0][l] | abs }}</loc><lastmod>{{ g[1] }}</lastmod>{% for a in langs %}<xhtml:link rel="alternate" hreflang="{{ a }}" href="{{ g[0][a] | abs }}"/>{% endfor %}<xhtml:link rel="alternate" hreflang="x-default" href="{{ g[0].az | abs }}"/></url>
+{%- endfor %}{% endfor %}
+{%- for l in langs %}{% for p in collections["posts_" + l] %}{% set key = p.data.translation_key or p.fileSlug %}
+<url><loc>{{ p.data.slug | abs }}</loc><lastmod>{{ (p.data.updated or p.date) | ymd }}</lastmod>{% for a in langs %}{% if postIndex[a][key] %}<xhtml:link rel="alternate" hreflang="{{ a }}" href="{{ (routes.postBase[a] + '/' + postIndex[a][key]) | abs }}"/>{% endif %}{% endfor %}{% if postIndex.az[key] %}<xhtml:link rel="alternate" hreflang="x-default" href="{{ ('bloq/' + postIndex.az[key]) | abs }}"/>{% endif %}</url>
+{%- endfor %}{% endfor %}
 </urlset>

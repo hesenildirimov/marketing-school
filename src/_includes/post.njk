@@ -1,21 +1,23 @@
 ---
 layout: base.njk
 ---
-{%- set related = courses | where("slug", course) -%}
+{%- set L = loc[lang] -%}{%- set u = L.ui -%}
+{%- set related = L.courses | where("slug", course) -%}
+{%- set posts = collections["posts_" + lang] -%}
 <article class="hero"><div class="wrap">
   {% include "crumb.njk" %}
   <div class="post-head">
-    <time datetime="{{ page.date | ymd }}">{{ page.date | ymd }}</time>{% if updated %} · <span class="muted">Yenilənib: <time datetime="{{ updated | ymd }}">{{ updated | ymd }}</time></span>{% endif %}
+    <time datetime="{{ page.date | ymd }}">{{ page.date | ymd }}</time>{% if updated %} · <span class="muted">{{ u.post_updated }}: <time datetime="{{ updated | ymd }}">{{ updated | ymd }}</time></span>{% endif %}
     <h1>{{ title }}</h1>
     <p class="lede">{{ description }}</p>
     {% if tags %}<ul class="meta-row">{% for t in tags %}<li>{{ t }}</li>{% endfor %}</ul>{% endif %}
   </div>
-  {% if key_points %}<aside class="keypoints" aria-label="Qısa xülasə"><strong>Qısaca</strong><ul>{% for k in key_points %}<li>{{ k }}</li>{% endfor %}</ul></aside>{% endif %}
+  {% if key_points %}<aside class="keypoints" aria-label="{{ u.key_points_label }}"><strong>{{ u.key_points }}</strong><ul>{% for k in key_points %}<li>{{ k }}</li>{% endfor %}</ul></aside>{% endif %}
   <div class="prose">{{ content | safe }}
-  {% if sources %}<h2>Mənbələr</h2><ol class="sources">{% for s in sources %}<li>{% if s.url %}<a href="{{ s.url }}" rel="noopener" target="_blank">{{ s.title }}</a>{% else %}{{ s.title }}{% endif %}</li>{% endfor %}</ol>{% endif %}
+  {% if sources %}<h2>{{ u.sources }}</h2><ol class="sources">{% for s in sources %}<li>{% if s.url %}<a href="{{ s.url }}" rel="noopener" target="_blank">{{ s.title }}</a>{% else %}{{ s.title }}{% endif %}</li>{% endfor %}</ol>{% endif %}
   </div>
-  <nav class="btns" aria-label="Məqalələr arasında keçid">{% set prev = collections.posts | getPreviousCollectionItem(page) %}{% set next = collections.posts | getNextCollectionItem(page) %}{% if next %}<a class="btn btn-ghost" rel="prev" href="{{ next.data.slug | link }}">← {{ next.data.title }}</a>{% endif %}{% if prev %}<a class="btn btn-ghost" rel="next" href="{{ prev.data.slug | link }}">{{ prev.data.title }} →</a>{% endif %}</nav>
+  <nav class="btns" aria-label="{{ u.post_nav }}">{% set prev = posts | getPreviousCollectionItem(page) %}{% set next = posts | getNextCollectionItem(page) %}{% if next %}<a class="btn btn-ghost" rel="prev" href="{{ next.data.slug | link }}">← {{ next.data.title }}</a>{% endif %}{% if prev %}<a class="btn btn-ghost" rel="next" href="{{ prev.data.slug | link }}">{{ prev.data.title }} →</a>{% endif %}</nav>
 </div></article>
-<section><div class="wrap"><h2>Bu mövzunu dərinləşdir</h2><div class="grid">
-  {% for c in (related if related.length else courses) %}<article class="card"><h3><a href="{{ c.slug | link }}">{{ c.name }}</a></h3><p>{{ c.lede }}</p></article>{% endfor %}
+<section><div class="wrap"><h2>{{ u.deepen }}</h2><div class="grid">
+  {% for c in (related if related.length else L.courses) %}<article class="card"><h3><a href="{{ routes.course[c.slug][lang] | link }}">{{ c.name }}</a></h3><p>{{ c.lede }}</p><p class="price-tag">{{ u.price_line }}</p></article>{% endfor %}
 </div></div></section>

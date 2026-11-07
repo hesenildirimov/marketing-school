@@ -10,8 +10,8 @@
       "label": "proqram"
     },
     {
-      "value": "3 ay",
-      "label": "müddət"
+      "value": "99 AZN",
+      "label": "aylıq, hər kurs"
     },
     {
       "value": "19",
@@ -37,11 +37,11 @@
     {
       "icon": "people",
       "title": "Canlı görüşlər və fərdi mentorluq",
-      "text": "2 həftədən bir sual-cavab, kurs sonunda hər tələbə ilə 1:1 mentorluq sessiyası."
+      "text": "Hər ayın 2-ci və 4-cü şənbəsi canlı sual-cavab, bütün dərsləri bitirəndə hər tələbə ilə 1:1 mentorluq sessiyası."
     }
   ],
   "courses_title": "Kurslarımız",
-  "courses_lede": "İki ayrı proqram var: biri marketinq qərarları, digəri rəqəmsal kanallarda icra haqqındadır.",
+  "courses_lede": "İki ayrı proqram var: biri marketinq qərarları, digəri rəqəmsal kanallarda icra haqqındadır. Hər kurs ayrıca 99 AZN/aydır.",
   "compare_title": "Hansı kurs sizə uyğundur?",
   "faq_title": "Marketinq kursları haqqında suallar",
   "cta_title": "Pulsuz demo dərsə giriş əldə edin",

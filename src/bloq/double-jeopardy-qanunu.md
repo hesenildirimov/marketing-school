@@ -1,4 +1,5 @@
 ---
+translation_key: double-jeopardy
 title: "Double jeopardy qanunu: niyə kiçik brendlərin loyallığı da kiçik olur"
 seo_title: "Double Jeopardy Qanunu — Brend Loyallığı Mifi"
 description: "Double jeopardy — brendin bazar payı azaldıqca həm müştəri sayı, həm loyallıq göstəriciləri düşür. Qanunun mahiyyəti və büdcə qərarlarına təsiri."

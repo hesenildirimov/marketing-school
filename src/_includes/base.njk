@@ -1,28 +1,35 @@
 {%- from "icons.njk" import logo -%}
+{%- set lang = lang or "az" -%}
+{%- set L = loc[lang] -%}
+{%- set u = L.ui -%}
+{%- set R = routes -%}
 {%- set canon = slug | abs -%}
 {%- set desc = seo_description -%}
 {%- set org = {
   "@context": "https://schema.org", "@type": "EducationalOrganization", "@id": siteUrl + "/#organization",
-  "name": site.name, "alternateName": site.alternate_names, "url": siteUrl + "/",
+  "name": L.site.name, "alternateName": L.site.alternate_names, "url": siteUrl + "/",
   "logo": {"@type": "ImageObject", "url": siteUrl + "/logo.png", "width": 512, "height": 512},
-  "image": siteUrl + "/og.png", "description": site.description, 
-  "address": {"@type": "PostalAddress", "streetAddress": site.address or undefined, "addressLocality": site.city, "addressCountry": site.country},
-  "telephone": site.phone or undefined, "email": site.email or undefined,
-  "areaServed": {"@type": "Country", "name": "Azerbaijan"}, "knowsAbout": site.knows_about,
-  "sameAs": site.social | pluck("url")
+  "image": siteUrl + "/og.png", "description": L.site.description, "inLanguage": lang,
+  "address": {"@type": "PostalAddress", "streetAddress": loc.az.site.address or undefined, "addressLocality": loc.az.site.city, "addressCountry": loc.az.site.country},
+  "telephone": loc.az.site.phone or undefined, "email": loc.az.site.email or undefined,
+  "areaServed": {"@type": "Country", "name": "Azerbaijan"}, "knowsAbout": L.site.knows_about,
+  "sameAs": loc.az.site.social | pluck("url")
 } -%}
 <!DOCTYPE html>
-<html lang="az">
+<html lang="{{ lang }}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{{ seo_title }}</title>
 <meta name="description" content="{{ desc }}">
 <meta name="robots" content="{{ 'noindex, nofollow' if noindex else 'index, follow, max-image-preview:large, max-snippet:-1' }}">
-{% if not noindex %}<link rel="canonical" href="{{ canon }}">{% endif %}
+{% if not noindex %}<link rel="canonical" href="{{ canon }}">
+{% if alternates %}{% for l in langs %}{% if alternates[l] is defined %}<link rel="alternate" hreflang="{{ l }}" href="{{ alternates[l] | abs }}">
+{% endif %}{% endfor %}{% if alternates.az is defined %}<link rel="alternate" hreflang="x-default" href="{{ alternates.az | abs }}">
+{% endif %}{% endif %}{% endif %}
 <meta property="og:type" content="{{ ogType or 'website' }}">
-<meta property="og:site_name" content="{{ site.name }}">
-<meta property="og:locale" content="az_AZ">
+<meta property="og:site_name" content="{{ L.site.name }}">
+<meta property="og:locale" content="{{ {'az': 'az_AZ', 'en': 'en_US', 'ru': 'ru_RU'}[lang] }}">
 <meta property="og:title" content="{{ seo_title }}">
 <meta property="og:description" content="{{ desc }}">
 <meta property="og:url" content="{{ canon }}">
@@ -34,18 +41,24 @@
 <link rel="icon" href="{{ 'favicon.svg' | asset }}" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{{ 'logo.png' | asset }}">
 <link rel="stylesheet" href="{{ 'style.css' | asset }}">
-<link rel="alternate" type="application/rss+xml" title="{{ site.name }} Bloq" href="{{ siteUrl }}/rss.xml">
-<link rel="alternate" type="text/plain" title="llms.txt" href="{{ siteUrl }}/llms.txt">
+<link rel="alternate" type="application/rss+xml" title="{{ u.rss_title }}" href="{{ siteUrl }}/{{ '' if lang == 'az' else lang + '/' }}rss.xml">
+<link rel="alternate" type="text/plain" title="llms.txt" href="{{ siteUrl }}/{{ '' if lang == 'az' else lang + '/' }}llms.txt">
 {% if not noindex %}<script type="application/ld+json">{{ org | json | safe }}</script>
 {% for block in ld %}<script type="application/ld+json">{{ block | json | safe }}</script>
-{% endfor %}{% if crumbs %}<script type="application/ld+json">{{ {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement": crumbs | crumbLd} | json | safe }}</script>{% endif %}{% endif %}
+{% endfor %}{% if crumbs %}<script type="application/ld+json">{{ {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement": crumbs | crumbLd(u.home, R.home[lang])} | json | safe }}</script>{% endif %}{% endif %}
 </head>
 <body{% if heroDark %} data-hero="dark"{% endif %}>
-<a class="skip" href="#main">Əsas məzmuna keç</a>
+<a class="skip" href="#main">{{ u.skip }}</a>
+<div class="lang-suggest" hidden data-lang-suggest data-msg-az="{{ loc.az.ui.suggest }}" data-msg-en="{{ loc.en.ui.suggest }}" data-msg-ru="{{ loc.ru.ui.suggest }}">
+  <span data-msg></span> <a data-target href="#"></a> <button type="button" data-close aria-label="{{ u.suggest_close }}">×</button>
+</div>
 <header class="site-head">
   <div class="wrap head-row">
-    <a class="brand" href="{{ '' | link }}">{{ logo() | safe }}<span>Marketing&nbsp;School</span></a>
-    <nav class="nav" aria-label="Əsas naviqasiya">{% for n in [['', 'Ana səhifə'], ['marketinq-kursu', 'Marketinq'], ['digital-marketinq-kursu', 'Rəqəmsal marketinq'], ['bloq', 'Bloq'], ['faq', 'FAQ']] %}<a href="{{ n[0] | link }}"{% if n[0] == slug %} aria-current="page"{% endif %}>{{ n[1] }}</a>{% endfor %}</nav>
+    <a class="brand" href="{{ R.home[lang] | link }}">{{ logo() | safe }}<span>Marketing&nbsp;School</span></a>
+    <nav class="nav" aria-label="{{ u.nav_label }}">
+      {%- for n in [[R.home[lang], u.home], [R.course['marketinq-kursu'][lang], u.nav_marketing], [R.course['digital-marketinq-kursu'][lang], u.nav_digital], [R.blog[lang], u.blog], [R.faq[lang], u.faq]] %}<a href="{{ n[0] | link }}"{% if n[0] == slug %} aria-current="page"{% endif %}>{{ n[1] }}</a>{% endfor -%}
+      <span class="lang-switch" role="group" aria-label="{{ u.lang_label }}">{% for l in langs %}{% set target = alternates[l] if (alternates and alternates[l] is defined) else R.home[l] %}<a href="{{ target | link }}" hreflang="{{ l }}" lang="{{ l }}" data-lang-link{% if l == lang %} aria-current="true"{% endif %}>{{ l | upper }}</a>{% endfor %}</span>
+    </nav>
   </div>
 </header>
 <main id="main">
@@ -54,38 +67,34 @@
 <footer class="site-foot">
   <div class="wrap foot-grid">
     <div>
-      <p class="foot-brand">{{ logo() | safe }}<strong>{{ site.name }}</strong></p>
-      <p class="muted">{{ site.tagline }}</p>
+      <p class="foot-brand">{{ logo() | safe }}<strong>{{ L.site.name }}</strong></p>
+      <p class="muted">{{ L.site.tagline }}</p>
     </div>
     <div>
-      <h2 class="foot-h">Kurslar</h2>
-      <ul class="plain">{% for c in courses %}<li><a href="{{ c.slug | link }}">{{ c.name }}</a></li>{% endfor %}</ul>
+      <h2 class="foot-h">{{ u.foot_courses }}</h2>
+      <ul class="plain">{% for c in L.courses %}<li><a href="{{ R.course[c.slug][lang] | link }}">{{ c.name }}</a> <small class="muted">· {{ u.price_line }}</small></li>{% endfor %}</ul>
     </div>
     <div>
-      <h2 class="foot-h">Sayt</h2>
+      <h2 class="foot-h">{{ u.foot_site }}</h2>
       <ul class="plain">
-        <li><a href="{{ 'bloq' | link }}">Bloq</a></li>
-        <li><a href="{{ 'faq' | link }}">Tez-tez verilən suallar</a></li>
-        <li><a href="{{ '' | link }}#muraciet">Müraciət</a></li>
+        <li><a href="{{ R.blog[lang] | link }}">{{ u.blog }}</a></li>
+        <li><a href="{{ R.faq[lang] | link }}">{{ u.foot_faq }}</a></li>
+        <li><a href="{{ R.home[lang] | link }}#muraciet">{{ u.foot_apply }}</a></li>
+        <li><a href="/platform/legal/privacy?lang={{ lang }}">{{ u.privacy }}</a></li>
       </ul>
     </div>
     <div>
-      <h2 class="foot-h">Əlaqə</h2>
+      <h2 class="foot-h">{{ u.foot_contact }}</h2>
       <ul class="plain">
-        <li class="muted">{{ site.address or (site.city + ", Azərbaycan") }}</li>
-        {% if site.phone %}<li><a href="tel:{{ site.phone | replace(' ', '') }}">{{ site.phone }}</a></li>{% endif %}
-        {% if site.email %}<li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>{% endif %}
-        {% for s in site.social %}<li><a rel="me noopener" target="_blank" href="{{ s.url }}">{{ s.name }}</a></li>{% endfor %}
+        <li class="muted">{{ L.site.address or (L.site.city + ", " + u.country) }}</li>
+        {% if loc.az.site.phone %}<li><a href="tel:{{ loc.az.site.phone | replace(' ', '') }}">{{ loc.az.site.phone }}</a></li>{% endif %}
+        {% if loc.az.site.email %}<li><a href="mailto:{{ loc.az.site.email }}">{{ loc.az.site.email }}</a></li>{% endif %}
+        {% for s in loc.az.site.social %}<li><a rel="me noopener" target="_blank" href="{{ s.url }}">{{ s.name }}</a></li>{% endfor %}
       </ul>
     </div>
   </div>
-  <div class="wrap foot-end"><p class="muted">© {{ site.updated | truncate(4, true, "") }} {{ site.name }} · {{ site.city }}, Azərbaycan · Son yenilənmə: <time datetime="{{ site.updated }}">{{ site.updated }}</time></p></div>
+  <div class="wrap foot-end"><p class="muted">© {{ loc.az.site.updated | truncate(4, true, "") }} {{ L.site.name }} · {{ L.site.city }}, {{ u.country }} · {{ u.updated }}: <time datetime="{{ loc.az.site.updated }}">{{ loc.az.site.updated }}</time></p></div>
 </footer>
-<script>
-(()=>{if(matchMedia("(prefers-reduced-motion:reduce)").matches||!("IntersectionObserver" in window))return;
-const q='main section:not(.hero) .wrap>h2,main section:not(.hero) .wrap>.lede,.card,.posts li,.faq details,.cta-info,#muraciet form,.modules li,.src-card,.table-scroll,.summary,.keypoints,.stats div';
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;el.classList.add("in");io.unobserve(el);setTimeout(()=>{el.classList.remove("rv","in");el.style.removeProperty("--d")},1200)}),{threshold:.1,rootMargin:"0px 0px -6% 0px"});
-document.querySelectorAll(q).forEach(el=>{if(el.getBoundingClientRect().top<innerHeight*.92)return;el.classList.add("rv");el.style.setProperty("--d",Math.min([...el.parentNode.children].indexOf(el),4)*90+"ms");io.observe(el)})})();
-</script>
+<script src="{{ 'site.js' | asset }}" defer></script>
 </body>
 </html>

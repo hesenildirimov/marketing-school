@@ -1,0 +1,19 @@
+---
+permalink: admin/tercume/index.html
+eleventyExcludeFromCollections: true
+---
+<!doctype html>
+<html lang="az"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Tərcümə vəziyyəti — Marketing School CMS</title><link rel="stylesheet" href="/style.css"></head>
+<body><main class="wrap" style="padding:24px 0">
+<h1>Tərcümə vəziyyəti (EN / RU)</h1>
+<p class="lede">AZ əsas dildir. Aşağıdakı siyahı CMS-də hansı dildə nəyin boş qaldığını göstərir. Boş sahələr saytda AZ mətni ilə əvəz olunmur — doldurulmalıdır.</p>
+{% set st = i18nStatus %}
+{% if not (st.empty | dictsort | length) %}<p>✓ Bütün tərcümə sahələri doludur.</p>{% endif %}
+{% for path, fields in st.empty %}<h2>{{ path }}</h2><ul>{% for f in fields %}<li><code>{{ f }}</code></li>{% endfor %}</ul>{% endfor %}
+<h2>Bloq yazıları</h2>
+<table class="facts"><thead><tr><th>Açar</th><th>AZ</th><th>EN</th><th>RU</th></tr></thead><tbody>
+{% for key, slug in postIndex.az %}<tr><td>{{ key }}</td><td>✓</td><td>{{ '✓' if postIndex.en[key] else '—' }}</td><td>{{ '✓' if postIndex.ru[key] else '—' }}</td></tr>{% endfor %}
+</tbody></table>
+<p class="hint">Tərcüməsi olmayan yazı həmin dilin bloq siyahısında görünmür.</p>
+</main></body></html>

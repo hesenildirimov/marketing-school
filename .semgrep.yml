@@ -1,0 +1,19 @@
+rules:
+  - id: raw-sql-interpolation
+    languages: [php]
+    severity: ERROR
+    message: "SQL-də dəyişən interpolyasiyası: parametrləşdirilmiş sorğu istifadə edin"
+    patterns:
+      - pattern-either:
+          - pattern: DB::$M("...$X...", ...)
+          - pattern: DB::$M("..." . $X . "...", ...)
+          - pattern: $Q->whereRaw("...$X...", ...)
+          - pattern: $Q->orderByRaw("...$X...", ...)
+          - pattern: $Q->selectRaw("...$X...", ...)
+    paths: { exclude: ["platform/database/migrations/*", "platform/app/Support/Rls.php", "platform/tests/*"] }
+  - id: unescaped-blade
+    languages: [generic]
+    severity: WARNING
+    message: "{!! !!} yalnız sanitizasiya olunmuş HTML üçün (HTMLPurifier) istifadə olunmalıdır"
+    pattern: "{!! $X !!}"
+    paths: { include: ["platform/resources/views/**"] }

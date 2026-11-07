@@ -1,0 +1,6 @@
+title = "marketing-school"
+[extend]
+useDefault = true
+[allowlist]
+description = "Test mühitinin saxta açarları (real sirr deyil)"
+paths = ['''platform/\.env\.testing''', '''platform/tests/.*''']

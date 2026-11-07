@@ -1,36 +1,42 @@
 ---
-permalink: llms-full.txt
+pagination: { data: langs, size: 1, alias: lang }
 eleventyExcludeFromCollections: true
 ---
-# {{ site.name }} — saytın tam mətni
+{%- set L = loc[lang] -%}{%- set u = L.ui -%}{%- set H = {
+  az: {upd: "Son yenilənmə", who: "Kimlər üçündür", after: "Kursdan sonra", modules: "Modullar", faq: "Tez-tez verilən suallar", blog: "Bloq", short: "Qısaca"},
+  en: {upd: "Last updated", who: "Who it is for", after: "After the course", modules: "Modules", faq: "Frequently asked questions", blog: "Blog", short: "Key points"},
+  ru: {upd: "Последнее обновление", who: "Для кого", after: "После курса", modules: "Модули", faq: "Частые вопросы", blog: "Блог", short: "Коротко"}
+}[lang] -%}
+# {{ L.site.name }} — {{ u.llms_title }}
 
-> {{ site.description }}
+> {{ L.site.description }}
 
-Son yenilənmə: {{ site.updated }}
-{% for c in courses %}
-## {{ c.name }} ({{ c.slug | abs }})
+{{ H.upd }}: {{ loc.az.site.updated }}
+{% if u.lang_note %}{{ u.lang_note }}
+{% endif %}{% for c in L.courses %}
+## {{ c.name }} ({{ routes.course[c.slug][lang] | abs }})
 
 {{ c.summary }}
 
 {{ c.overview }}
 
-Kimlər üçündür: {{ c.audience | join("; ") }}.
-Kursdan sonra: {{ c.outcomes | join("; ") }}.
-{% for f in c.facts %}- {{ f.label }}: {{ (c.price + " " + c.currency) if (f.label == "Qiymət" and c.price) else f.value }}
+{{ H.who }}: {{ c.audience | join("; ") }}.
+{{ H.after }}: {{ c.outcomes | join("; ") }}.
+{% for f in c.facts %}- {{ f.label }}: {{ f.value }}
 {% endfor %}
-Modullar:
+{{ H.modules }}:
 {% for m in c.modules %}{{ loop.index }}. {{ m.title }} — {{ m.text }}
 {% endfor %}{% endfor %}
-## Tez-tez verilən suallar ({{ 'faq' | abs }})
-{% for f in faq.items %}
+## {{ H.faq }} ({{ routes.faq[lang] | abs }})
+{% for f in L.faq.items %}
 ### {{ f.q }}
 {{ f.a | plain }}
-{% endfor %}
-## Bloq
-{% for p in collections.posts %}
+{% endfor %}{% set posts = collections["posts_" + lang] %}{% if posts.length %}
+## {{ H.blog }}
+{% for p in posts %}
 ### {{ p.data.title }} ({{ p.data.slug | abs }})
 {{ p.date | ymd }} · {{ p.data.description }}
-{% if p.data.key_points %}Qısaca: {{ p.data.key_points | join(" ") }}{% endif %}
+{% if p.data.key_points %}{{ H.short }}: {{ p.data.key_points | join(" ") }}{% endif %}
 
 {{ p.content | plain | safe }}
-{% endfor %}
+{% endfor %}{% endif %}

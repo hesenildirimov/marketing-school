@@ -7,8 +7,10 @@ eleventyExcludeFromCollections: true
 seo_title: "Səhifə tapılmadı | Marketing School"
 seo_description: "Axtardığınız səhifə mövcud deyil."
 ---
-<section class="hero"><div class="wrap">
-  <h1>Səhifə tapılmadı (404)</h1>
-  <p class="lede">Axtardığınız ünvan mövcud deyil və ya köçürülüb. Aşağıdakı səhifələrdən birinə keçin.</p>
-  <div class="btns"><a class="btn" href="{{ '' | link }}">Ana səhifə</a>{% for c in courses %}<a class="btn btn-ghost" href="{{ c.slug | link }}">{{ c.name }}</a>{% endfor %}<a class="btn btn-ghost" href="{{ 'faq' | link }}">FAQ</a></div>
+{% for l in langs %}{% set L = loc[l] %}
+<section class="hero" lang="{{ l }}"><div class="wrap">
+  {% if loop.first %}<h1>{{ L.ui.not_found_title }}</h1>{% else %}<h2>{{ L.ui.not_found_title }}</h2>{% endif %}
+  <p class="lede">{{ L.ui.not_found_lede }}</p>
+  <div class="btns"><a class="btn" href="{{ routes.home[l] | link }}">{{ L.ui.home }}</a>{% for c in L.courses %}<a class="btn btn-ghost" href="{{ routes.course[c.slug][l] | link }}">{{ c.name }}</a>{% endfor %}<a class="btn btn-ghost" href="{{ routes.faq[l] | link }}">FAQ</a></div>
 </div></section>
+{% endfor %}

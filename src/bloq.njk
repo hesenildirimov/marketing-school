@@ -1,16 +1,13 @@
 ---
 layout: base.njk
-slug: bloq
-crumbs: [["Bloq", "bloq"]]
-eleventyComputed:
-  permalink: "{{ 'bloq' | out }}"
-  seo_title: "{{ blog.seo_title }}"
-  seo_description: "{{ blog.seo_description }}"
+pagination: { data: langs, size: 1, alias: lang }
 ---
 {%- from "icons.njk" import ico -%}
+{%- set L = loc[lang] -%}{%- set u = L.ui -%}{%- set posts = collections["posts_" + lang] -%}
 <section class="hero"><div class="wrap">
   {% include "crumb.njk" %}
-  <h1>{{ blog.h1 }}</h1>
-  <p class="lede">{{ blog.lede }}</p>
+  <h1>{{ L.blog.h1 }}</h1>
+  <p class="lede">{{ L.blog.lede }}</p>
 </div></section>
-<section><div class="wrap"><ul class="posts">{% for p in collections.posts %}<li><article><span class="pthumb">{{ ico('book') | safe }}</span><div><time datetime="{{ p.date | ymd }}">{{ p.date | ymd }}</time><h2><a href="{{ p.data.slug | link }}">{{ p.data.title }}</a></h2><p>{{ p.data.description }}</p></div></article></li>{% endfor %}</ul></div></section>
+<section><div class="wrap">{% if posts.length %}<ul class="posts">{% for p in posts %}<li><article><span class="pthumb">{{ ico('book') | safe }}</span><div><time datetime="{{ p.date | ymd }}">{{ p.date | ymd }}</time><h2><a href="{{ p.data.slug | link }}">{{ p.data.title }}</a></h2><p>{{ p.data.description }}</p></div></article></li>{% endfor %}</ul>
+{% else %}<p class="muted">{{ u.no_posts }}</p>{% endif %}</div></section>

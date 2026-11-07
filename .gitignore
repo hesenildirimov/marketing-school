@@ -1,3 +1,11 @@
 node_modules/
 _site/
 _demo/
+# Sirlər və deploy vəziyyəti (heç vaxt commit etməyin)
+.env
+*.env
+!*.env.example
+.env.*
+!.env.example
+deploy/.last-tag-*
+platform/.env.staging

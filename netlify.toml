@@ -14,7 +14,35 @@
   status = 301
   force = true
 
+# Təhlükəsizlik başlıqları (landing). /platform/* proxy cavablarına tətbiq olunmur — onları origin özü qaytarır.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'none'; object-src 'none'; upgrade-insecure-requests"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+    Cross-Origin-Opener-Policy = "same-origin"
+
+# Decap CMS: GitHub API + unpkg (SRI ilə) tələb edir; noindex
 [[headers]]
   for = "/admin/*"
   [headers.values]
-    X-Robots-Tag = "noindex"
+    X-Robots-Tag = "noindex, nofollow"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.githubusercontent.com https://avatars.githubusercontent.com; connect-src 'self' https://api.github.com https://api.netlify.com; frame-src https://api.netlify.com; frame-ancestors 'none'; base-uri 'none'; object-src 'none'"
+
+[[headers]]
+  for = "/*.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+
+# Platforma: marketingschool.az/platform/* → VPS (imzalı proxy, x-nf-sign HS256).
+# PLATFORM_PROXY_SECRET Netlify environment variables-da (scope: Runtime) və serverin .env-ində eyni olmalıdır.
+[[redirects]]
+  from = "/platform/*"
+  to = "https://origin.marketingschool.az/platform/:splat"
+  status = 200
+  force = true
+  signed = "PLATFORM_PROXY_SECRET"

@@ -14,10 +14,11 @@
   "eyebrow": "Onlayn marketinq kursu",
   "h1": "Marketinq kursu — onlayn, Azərbaycan dilində",
   "lede": "Marketinqi başdan sona öyrədən 3 aylıq onlayn proqram: bazarı və müştərini tanımaq, brendi qurmaq, qiymət vermək, kampaniya planlamaq, nəticəni ölçmək. Təlimçi — Həsənalı İldırımov.",
-  "summary": "Marketinq Kursu Marketing School-un 3 aylıq onlayn marketinq proqramıdır. 9 modulda bazar və müştəri araşdırması, rəqib analizi, brend mövqeləndirmə, qiymət, kampaniya planlaması, kanallar və ölçmə öyrədilir. Dərslərə istənilən vaxt baxmaq olar; 2 həftədən bir canlı sual-cavab, real keyslərə əsaslanan ev tapşırıqları və kurs sonunda fərdi mentorluq sessiyası var. Kursu bitirənlərə diplom verilir. Təlimçi Azersun Holding-də Non-Food kateqoriyasının rəhbəri Həsənalı İldırımovdur.",
+  "summary": "Marketinq Kursu Marketing School-un 3 aylıq onlayn marketinq proqramıdır. 9 modulda bazar və müştəri araşdırması, rəqib analizi, brend mövqeləndirmə, qiymət, kampaniya planlaması, kanallar və ölçmə öyrədilir. Dərslərə istənilən vaxt baxmaq olar; hər ayın 2-ci və 4-cü şənbəsi canlı sual-cavab, real keyslərə əsaslanan ev tapşırıqları və kurs sonunda fərdi mentorluq sessiyası var. Qiymət hər kurs üçün ayrıca 99 AZN/aydır. Kursu bitirənlərə diplom verilir. Təlimçi Azersun Holding-də Non-Food kateqoriyasının rəhbəri Həsənalı İldırımovdur.",
   "chips": [
     "Onlayn · istənilən vaxt",
     "3 ay",
+    "99 AZN / ay",
     "9 modul",
     "Real keyslər",
     "1:1 mentorluq",
@@ -27,7 +28,7 @@
   "for_whom_short": "Sahəyə yeni başlayanlar, menecerlər, biznes sahibləri",
   "teacher_short": "Həsənalı İldırımov",
   "card_text": "Bazarı və müştərini araşdırmaq, brendi mövqeləndirmək, qiymət qoymaq, kampaniya planlamaq və nəticəni rəqəmlə ölçmək — real keyslər üzərində.",
-  "overview": "Kurs marketinqin bütün əsas hissələrini bir yerə yığır: bazarı və müştərini araşdırmaq, brendi mövqeləndirmək, qiymət qoymaq, kampaniya planlamaq, kanalları seçmək və nəticəni rəqəmlə ölçmək. Hər modul videodərslərdən və real keysə əsaslanan ev tapşırığından ibarətdir. 2 həftədən bir canlı görüşdə suallarınıza təlimçi cavab verir, kursun sonunda isə sizinlə fərdi mentorluq sessiyası keçirilir.",
+  "overview": "Kurs marketinqin bütün əsas hissələrini bir yerə yığır: bazarı və müştərini araşdırmaq, brendi mövqeləndirmək, qiymət qoymaq, kampaniya planlamaq, kanalları seçmək və nəticəni rəqəmlə ölçmək. Hər modul videodərslərdən və real keysə əsaslanan ev tapşırığından ibarətdir. hər ayın 2-ci və 4-cü şənbəsi keçirilən canlı görüşdə suallarınıza təlimçi cavab verir, kursun sonunda isə sizinlə fərdi mentorluq sessiyası keçirilir.",
   "facts": [
     {
       "label": "Format",
@@ -35,15 +36,15 @@
     },
     {
       "label": "Müddət",
-      "value": "3 ay"
+      "value": "3 ay (standart); bitirməyən tələbə aylıq ödənişlə davam edə bilər"
     },
     {
       "label": "Canlı görüşlər",
-      "value": "2 həftədən bir onlayn sual-cavab"
+      "value": "Hər ayın 2-ci və 4-cü şənbəsi, 11:00 (Bakı vaxtı), onlayn sual-cavab"
     },
     {
       "label": "Mentorluq",
-      "value": "Kurs sonunda hər tələbə ilə fərdi (1:1) sessiya"
+      "value": "Bütün dərsləri bitirəndən sonra hər tələbə ilə fərdi (1:1) sessiya"
     },
     {
       "label": "Ev tapşırıqları",
@@ -71,11 +72,11 @@
     },
     {
       "label": "Sənəd",
-      "value": "Kursu bitirənlərə diplom (sertifikat)"
+      "value": "Diplom (sertifikat): məcburi tapşırıqlardan ümumi balın ən azı 75%-i"
     },
     {
       "label": "Qiymət",
-      "value": "Müraciət formu ilə göndərilir"
+      "value": "99 AZN / ay (hər kurs ayrıca 99 AZN-dir)"
     }
   ],
   "audience": [
@@ -168,7 +169,7 @@
       "Bakcell-də Formula 1, 5G və rebrending kampaniyaları"
     ]
   },
-  "price": "",
+  "price": "99",
   "currency": "AZN",
-  "updated": "2026-11-01"
+  "updated": "2026-11-02"
 }

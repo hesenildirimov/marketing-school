@@ -1,0 +1,85 @@
+name: CI
+on:
+  push: { branches: ["**"] }
+  pull_request:
+
+permissions: { contents: read }
+
+jobs:
+  platform:
+    runs-on: ubuntu-24.04
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env: { POSTGRES_PASSWORD: postgres }
+        ports: ["5432:5432"]
+        options: --health-cmd "pg_isready -U postgres" --health-interval 5s --health-retries 10
+      clamav:
+        image: clamav/clamav:1.4
+        ports: ["3310:3310"]
+    defaults: { run: { working-directory: platform } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with: { php-version: "8.4", extensions: "pdo_pgsql, intl, zip, gd, bcmath, sockets, pcntl", coverage: none }
+      - run: composer install --no-interaction --prefer-dist
+      - name: DB rolları (ms_owner / ms_app / ms_worker)
+        working-directory: deploy/postgres
+        env: { PGHOST: localhost, PGUSER: postgres, PGPASSWORD: postgres, DB_NAME: ms_test, OWNER_PASSWORD: owner, APP_PASSWORD: app, WORKER_PASSWORD: worker }
+        run: ./init-roles.sh
+      - name: ClamAV hazır olana qədər gözlə
+        run: for i in $(seq 1 60); do (echo PING | nc -w 2 localhost 3310 | grep -q PONG) && break; sleep 5; done
+      - run: vendor/bin/pint --test
+      - run: php artisan test
+      - run: composer audit --no-dev
+      - run: npm ci && npm audit --omit=dev
+
+  landing:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm run build
+      - run: node scripts/sync-design-tokens.mjs --check
+      - run: npm test --if-present
+      - run: npm audit --omit=dev
+
+  e2e:
+    runs-on: ubuntu-24.04
+    needs: platform
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env: { POSTGRES_PASSWORD: postgres }
+        ports: ["5432:5432"]
+        options: --health-cmd "pg_isready -U postgres" --health-interval 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with: { php-version: "8.4", extensions: "pdo_pgsql, intl, zip, gd, bcmath, sockets, pcntl", coverage: none }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: DB rolları (ms_e2e)
+        working-directory: deploy/postgres
+        env: { PGHOST: localhost, PGUSER: postgres, PGPASSWORD: postgres, DB_NAME: ms_e2e, OWNER_PASSWORD: owner, APP_PASSWORD: app, WORKER_PASSWORD: worker }
+        run: ./init-roles.sh
+      - working-directory: platform
+        run: composer install --no-interaction --prefer-dist && npm ci && npm run vendor
+      - run: npm install -g playwright@1.49.1 && playwright install --with-deps chromium
+      - run: e2e/run.sh
+      - if: failure()
+        run: tail -n 200 /tmp/ms-e2e-server.log platform/storage/logs/*.log || true
+
+  security:
+    runs-on: ubuntu-24.04
+    permissions: { contents: read, security-events: write }
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - name: Secret scanning (gitleaks, bütün tarixçə)
+        uses: gitleaks/gitleaks-action@v2
+        env: { GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}" }
+      - name: SAST (Semgrep)
+        run: pipx run semgrep scan --config p/php --config p/javascript --config p/secrets --config .semgrep.yml --error --metrics=off

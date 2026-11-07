@@ -1,0 +1,76 @@
+# Production (və -p ms-staging --env-file staging.env ilə staging). Bölmə 3, arxitektura sənədi.
+name: ms-${STACK:-prod}
+
+x-php: &php
+  image: marketingschool/platform:${IMAGE_TAG:-latest}
+  build: { context: .., dockerfile: deploy/php/Dockerfile }
+  env_file: ${APP_ENV_FILE:-../platform/.env}
+  restart: unless-stopped
+  volumes:
+    - private-files:/var/www/storage/app/private
+    - logs:/var/www/storage/logs
+  depends_on:
+    postgres: { condition: service_healthy }
+
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    ports: ["${HTTP_PORT:-80}:80", "${HTTPS_PORT:-443}:443"]
+    volumes:
+      - ./nginx/platform.conf:/etc/nginx/conf.d/default.conf:ro
+      - ../platform/public:/var/www/public:ro
+      - private-files:/var/www/storage/app/private:ro
+      - ${LETSENCRYPT_DIR:-/etc/letsencrypt}:/etc/letsencrypt:ro
+      - certbot-www:/var/www/certbot:ro
+    depends_on: [app]
+
+  app:
+    <<: *php
+    # Veb prosesində worker/owner parolları yoxdur (ən az səlahiyyət)
+    environment: { DB_CONNECTION: pgsql, DB_WORKER_PASSWORD: "", DB_OWNER_PASSWORD: "" }
+
+  worker:
+    <<: *php
+    command: ["php", "artisan", "platform:work"]
+    environment: { DB_CONNECTION: pgsql_worker, DB_OWNER_PASSWORD: "" }
+
+  scheduler:
+    <<: *php
+    command: ["php", "artisan", "schedule:work"]
+    environment: { DB_CONNECTION: pgsql_worker, DB_OWNER_PASSWORD: "" }
+
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/pg_superuser
+      DB_NAME: ${DB_DATABASE:-marketingschool}
+      OWNER_PASSWORD: ${DB_OWNER_PASSWORD}
+      APP_PASSWORD: ${DB_PASSWORD}
+      WORKER_PASSWORD: ${DB_WORKER_PASSWORD}
+      BACKUP_PASSWORD: ${DB_BACKUP_PASSWORD}
+    secrets: [pg_superuser]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./postgres/init-roles.sh:/docker-entrypoint-initdb.d/10-roles.sh:ro
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U postgres"], interval: 10s, retries: 5 }
+    # Yalnız host-un localhost-una açılır (host cron backup-ı üçün); internetə açıq deyil.
+    ports: ["127.0.0.1:${PG_HOST_PORT:-5432}:5432"]
+
+  clamav:
+    image: clamav/clamav:1.4
+    restart: unless-stopped
+    volumes: [clamav-db:/var/lib/clamav]
+    # ~1.2–1.5 GB RAM (imza bazası). freshclam konteynerin içində avtomatik yenilənir.
+
+  certbot:
+    image: certbot/certbot:v3.1.0
+    profiles: ["certs"]   # yalnız prod: --profile certs
+    volumes: ["${LETSENCRYPT_DIR:-/etc/letsencrypt}:/etc/letsencrypt", "certbot-www:/var/www/certbot"]
+    entrypoint: ["/bin/sh", "-c", "trap exit TERM; while :; do certbot renew --webroot -w /var/www/certbot --quiet; sleep 12h & wait $${!}; done"]
+
+secrets:
+  pg_superuser: { file: ./secrets/pg_superuser.txt }
+
+volumes: { pgdata: {}, private-files: {}, logs: {}, clamav-db: {}, certbot-www: {} }

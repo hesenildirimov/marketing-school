@@ -1,4 +1,3 @@
-import fs from "node:fs";
-const dir = "src/_data/kurslar/";
-export default () => fs.readdirSync(dir).filter((f) => f.endsWith(".json")).sort()
-  .map((f) => JSON.parse(fs.readFileSync(dir + f, "utf8")));
+// Geriyə uyğunluq: AZ kursları (CMS və köhnə şablonlar üçün)
+import { load } from "../_includes/i18n.js";
+export default () => load("az").courses;

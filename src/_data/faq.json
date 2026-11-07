@@ -3,7 +3,7 @@
   "seo_description": "Onlayn marketinq və digital marketinq kursları haqqında 25 sual: format, mentorluq, diplom, SMM və SEO, müddət, qiymət, iş imkanları.",
   "h1": "Marketinq kursları haqqında suallar",
   "lede": "Onlayn marketinq və rəqəmsal (digital) marketinq kursu seçənlərin ən çox verdiyi suallar — qısa, birbaşa cavablarla.",
-  "updated": "2026-11-01",
+  "updated": "2026-11-02",
   "groups": [
     {
       "id": "umumi",
@@ -47,7 +47,7 @@
         "digital-marketinq-kursu"
       ],
       "q": "Pulsuz demo dərs varmı?",
-      "a": "Bəli. Müraciət formunu doldurduqda platformaya 1 günlük pulsuz giriş verilir. Bu müddətdə demo dərsə baxıb kursun formatını özünüz görə bilərsiniz."
+      "a": "Bəli. Demo formasını doldurduqda seçdiyiniz kursun ilk 2 moduluna 24 saatlıq pulsuz giriş verilir. 24 saat qeydiyyat anından hesablanır. Demo bütün platformada bir dəfə verilir (bir kurs üçün). Ödəniş etsəniz, eyni hesabla davam edirsiniz və demo zamanı izlədikləriniz saxlanılır."
     },
     {
       "group": "umumi",
@@ -83,7 +83,7 @@
         "home"
       ],
       "q": "Marketinq kursu neçə ay davam edir?",
-      "a": "Hər iki kurs 3 ay davam edir. Dərslər qeydə alınıb, ona görə öz tempinizlə irəliləyə bilərsiniz. Marketinq 9, Rəqəmsal Marketinq 10 moduldan ibarətdir."
+      "a": "Standart müddət 3 aydır, amma sərt son tarix yoxdur. Dərslər qeydə alınıb, öz tempinizlə irəliləyirsiniz; 3 ayda bitirməsəniz, aylıq 99 AZN ödəməklə davam edə bilərsiniz. Marketinq 9, Rəqəmsal Marketinq 10 moduldan ibarətdir."
     },
     {
       "group": "umumi",
@@ -99,7 +99,7 @@
         "digital-marketinq-kursu"
       ],
       "q": "Kurs necə keçir? Dərslərə istədiyim vaxt baxa bilərəm?",
-      "a": "Bəli. Kurs tam onlayndır: dərslər qeydə alınmış videolardır və istənilən vaxt, istənilən cihazdan baxmaq olar — Udemy kimi. Bununla yanaşı, 2 həftədən bir canlı onlayn sual-cavab görüşü keçirilir və kursun sonunda fərdi mentorluq sessiyası olur."
+      "a": "Bəli. Kurs tam onlayndır: dərslər qeydə alınmış videolardır və istənilən vaxt, istənilən cihazdan baxmaq olar — Udemy kimi. Bununla yanaşı, hər ayın 2-ci və 4-cü şənbəsi canlı onlayn sual-cavab görüşü keçirilir və kursun sonunda fərdi mentorluq sessiyası olur."
     },
     {
       "group": "format",
@@ -109,7 +109,7 @@
         "digital-marketinq-kursu"
       ],
       "q": "Canlı sual-cavab görüşləri nə vaxt keçirilir?",
-      "a": "Hər 2 həftədən bir onlayn görüş keçirilir. Orada təlimçi suallarınıza cavab verir, ev tapşırıqlarını və real keysləri müzakirə edir. Canlı görüşə qoşula bilməsəniz, sualınızı əvvəlcədən göndərə bilərsiniz. Görüş cədvəli qeydiyyatdan sonra paylaşılır."
+      "a": "Hər ayın 2-ci və 4-cü şənbəsi, saat 11:00-da (Bakı vaxtı) onlayn görüş keçirilir. Orada təlimçi suallarınıza cavab verir, ev tapşırıqlarını və real keysləri müzakirə edir. Sualınızı platformadan əvvəlcədən göndərə bilərsiniz, görüşün yazısı sonradan platformada olur."
     },
     {
       "group": "format",
@@ -119,7 +119,7 @@
         "digital-marketinq-kursu"
       ],
       "q": "Fərdi mentorluq sessiyası nədir?",
-      "a": "Kursun sonunda hər tələbə ilə təlimçi arasında ayrıca fərdi (1:1) onlayn görüş keçirilir. Orada tapşırıqlardakı nəticələriniz, güclü və zəif tərəfləriniz və karyera və ya biznes məqsədinizə uyğun növbəti addımlar müzakirə olunur."
+      "a": "Kursun bütün dərslərini tamamlayanda hər tələbə təlimçi ilə ayrıca fərdi (1:1) onlayn görüş rezerv edir. Orada tapşırıqlardakı nəticələriniz, güclü və zəif tərəfləriniz və karyera və ya biznes məqsədinizə uyğun növbəti addımlar müzakirə olunur. Vaxtı platformadakı təqvimdən özünüz seçirsiniz."
     },
     {
       "group": "format",
@@ -138,7 +138,7 @@
         "digital-marketinq-kursu"
       ],
       "q": "Diplom verilirmi?",
-      "a": "Bəli. Kursu uğurla bitirən hər tələbəyə Marketing School-un diplomu (sertifikatı) verilir."
+      "a": "Bəli. Məcburi ev tapşırıqlarından ümumi balın ən azı 75%-ni toplayan tələbəyə Marketing School-un diplomu (sertifikatı) verilir. Diplomun unikal yoxlama linki var və ödəniş müddəti bitsə belə qüvvədə qalır."
     },
     {
       "group": "reqemsal",
@@ -233,15 +233,19 @@
     },
     {
       "group": "qeydiyyat",
-      "show_on": [],
+      "show_on": [
+        "home",
+        "marketinq-kursu",
+        "digital-marketinq-kursu"
+      ],
       "q": "Marketinq kursunun qiyməti nə qədərdir?",
-      "a": "Cari qiymət və ödəniş şərtləri [müraciət formasını](#muraciet) doldurduqdan sonra e-mail ilə göndərilir."
+      "a": "Hər kursun qiyməti ayrıca 99 AZN/aydır: Marketinq Kursu — 99 AZN/ay, Rəqəmsal Marketinq Kursu — 99 AZN/ay. Bir kursun ödənişi digər kursa giriş vermir. Standart müddət 3 aydır; vaxtında bitirməsəniz, aylıq ödənişlə davam edə bilərsiniz. Avtomatik ödənişi istənilən vaxt dayandırmaq olar."
     },
     {
       "group": "qeydiyyat",
       "show_on": [],
       "q": "Kurs harada keçirilir və qeydiyyatdan sonra nə olur?",
-      "a": "Kurs tam onlayndır, fiziki məkana ehtiyac yoxdur. Qeydiyyatdan sonra videodərslərə giriş və canlı görüşlərin cədvəli göndərilir."
+      "a": "Kurs tam onlayndır, fiziki məkana ehtiyac yoxdur. Qeydiyyatdan sonra e-mailinizə link gəlir: parol təyin edib platformaya daxil olursunuz. Videodərslər, ev tapşırıqları, canlı görüşlərin cədvəli və 1:1 mentorluq platformadadır."
     }
   ]
 }
