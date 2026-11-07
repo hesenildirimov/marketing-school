@@ -6,6 +6,6 @@
     "vendor": "mkdir -p public/platform/assets/vendor && cp node_modules/hls.js/dist/hls.light.min.js public/platform/assets/vendor/"
   },
   "dependencies": {
-    "hls.js": "1.6.13"
+    "hls.js": "1.7.4"
   }
 }
