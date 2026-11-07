@@ -79,7 +79,7 @@ jobs:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
       - name: Secret scanning (gitleaks, bütün tarixçə)
-        uses: gitleaks/gitleaks-action@v2
+        uses: gitleaks/gitleaks-action@v3
         env: { GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}" }
       - name: SAST (Semgrep)
         run: pipx run semgrep scan --config p/php --config p/javascript --config p/secrets --config .semgrep.yml --error --metrics=off
