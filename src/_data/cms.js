@@ -39,6 +39,37 @@ const courseFields = [
 
 const file = (name, label, path, fields) => ({ name, label, file: path, format: "json", fields });
 
+// Tərcümə faylları (EN/RU): yalnız tərcümə olunan sahələr. Slug, qiymət, şəkil, linklər AZ fayldan gəlir.
+const trCourseFields = [
+  s("name", "Kurs adı"), strList("alt_names", "Alternativ adlar"), ...seo, s("eyebrow", "Üst yazı"), s("h1", "H1 başlıq"), t("lede", "Giriş mətni"),
+  t("summary", "Qısa cavab (AI/GEO üçün)"), strList("chips", "Etiketlər"), s("focus", "Müqayisə: nə öyrədir"), s("for_whom_short", "Müqayisə: kimə uyğundur"),
+  s("teacher_short", "Təlimçi (qısa)"), t("card_text", "Kart mətni"), t("overview", "Kurs haqqında"),
+  objList("facts", "Faktlar", [s("label", "Ad"), s("value", "Dəyər")]), strList("audience", "Kimlər üçündür"), strList("outcomes", "Nə bacaracaqsınız"),
+  objList("features", "Fərq kartları", [s("title", "Başlıq"), t("text", "Mətn")]), objList("modules", "Modullar", [s("title", "Modul adı"), t("text", "Təsvir")]),
+  { name: "instructor", label: "Təlimçi", widget: "object", fields: [s("name", "Ad (bu dildə yazılış)"), s("role", "Vəzifə"), strList("knows_about", "Ekspertiza"), strList("highlights", "Önə çıxan faktlar"), strList("short", "Qısa faktlar")] },
+];
+const trFaqFields = [...seo, s("h1", "H1"), t("lede", "Giriş"), objList("groups", "Qruplar", [s("id", "ID"), s("name", "Ad")]),
+  objList("items", "Suallar", [s("q", "Sual"), t("a", "Cavab"), s("group", "Qrup ID"), strList("show_on", "Səhifələr", opt)], { summary: "{{fields.q}}" })];
+const trLang = (code, label) => ({
+  name: `tr_${code}`, label: `Tərcümə: ${label}`, editor: { preview: false },
+  description: "Hansı sahənin boş qaldığını görmək üçün: /admin/tercume/",
+  files: [
+    file(`home_${code}`, `Ana səhifə (${label})`, `src/_data/i18n/${code}/home.json`, [...seo, s("eyebrow", "Üst yazı"), s("h1", "H1"), t("lede", "Giriş"),
+      objList("stats", "Statistika", [s("value", "Rəqəm"), s("label", "Ad")]), s("why_title", "Niyə biz — başlıq"),
+      objList("why", "Niyə biz", [s("icon", "İkon"), s("title", "Başlıq"), t("text", "Mətn")]), s("courses_title", "Kurslar başlığı"), t("courses_lede", "Kurslar mətni"),
+      s("compare_title", "Müqayisə"), s("team_title", "Təlimçilər"), t("team_lede", "Təlimçilər mətni"), s("faq_title", "FAQ başlığı"), s("cta_title", "Müraciət başlığı")]),
+    file(`mk_${code}`, `Kurs: Marketinq (${label})`, `src/_data/i18n/${code}/kurslar/1-marketinq.json`, trCourseFields),
+    file(`dm_${code}`, `Kurs: Rəqəmsal (${label})`, `src/_data/i18n/${code}/kurslar/2-reqemsal.json`, trCourseFields),
+    file(`faq_${code}`, `FAQ (${label})`, `src/_data/i18n/${code}/faq.json`, trFaqFields),
+    file(`blog_${code}`, `Bloq səhifəsi (${label})`, `src/_data/i18n/${code}/blog.json`, [...seo, s("h1", "H1"), t("lede", "Giriş")]),
+    file(`site_${code}`, `Sayt (${label})`, `src/_data/i18n/${code}/site.json`, [strList("alternate_names", "Alternativ adlar"), s("tagline", "Footer"), t("description", "Təsvir"), s("city", "Şəhər"),
+      strList("knows_about", "Ekspertiza"), { name: "form", label: "Forma", widget: "object", fields: [s("title", "Başlıq"), t("lede", "Mətn"), strList("benefits", "Üstünlüklər"), s("button", "Düymə"), s("consent", "Razılıq"), s("once_note", "Demo qaydası")] },
+      { name: "thanks", label: "Təşəkkür", widget: "object", fields: [s("title", "Başlıq"), t("text", "Mətn")] }]),
+  ],
+});
+const blogFolder = (name, label, folder, preview) => ({ ...BLOG_BASE, name, label, folder, preview_path: preview });
+
+let BLOG_BASE = {};
 const config = {
   backend: { name: "github", repo: "hesenildirimov/marketing-school", branch: "main" },
   local_backend: true,
@@ -49,11 +80,16 @@ const config = {
   public_folder: "/uploads",
   slug: { encoding: "ascii", clean_accents: true },
   collections: [
+    blogFolder("blog_en", "Blog (EN)", "src/en/blog", "en/blog/{{slug}}/"),
+    blogFolder("blog_ru", "Блог (RU)", "src/ru/blog", "ru/blog/{{slug}}/"),
+    trLang("en", "EN"),
+    trLang("ru", "RU"),
     {
-      name: "bloq", label: "Bloq", label_singular: "Məqalə", folder: "src/bloq", create: true,
+      name: "bloq", label: "Bloq (AZ)", label_singular: "Məqalə", folder: "src/bloq", create: true,
       extension: "md", format: "frontmatter", slug: "{{slug}}", summary: "{{title}} — {{date}}",
       sortable_fields: ["date", "title"], preview_path: "bloq/{{slug}}/",
       fields: [
+        s("translation_key", "Tərcümə açarı (bütün dillərdə eyni)", { required: false, hint: "Məs: double-jeopardy. Eyni açarlı yazılar dillər arasında hreflang ilə bağlanır." }),
         s("title", "Başlıq (H1)", { hint: "Oxucunun axtardığı sual/ifadə ilə yazın. Məs: \"SMM nədir və necə öyrənmək olar\"" }),
         s("seo_title", "SEO başlıq (≤60, boş qala bilər)", { required: false, pattern: ["^.{0,60}$", "≤60 simvol"] }),
         t("description", "Qısa təsvir (≤155)", { pattern: ["^[\\s\\S]{50,160}$", "50–160 simvol"] }),
@@ -101,13 +137,17 @@ const config = {
           strList("knows_about", "Ekspertiza sahələri"),
           objList("social", "Sosial şəbəkələr", [s("name", "Ad"), s("url", "Link")]),
           { name: "updated", label: "Sayt son yenilənmə", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false },
-          { name: "form", label: "Müraciət forması", widget: "object", fields: [s("title", "Başlıq"), t("lede", "Mətn"), strList("benefits", "Nə alacaqsınız"), s("button", "Düymə"), s("consent", "Razılıq mətni")] },
+          { name: "form", label: "Müraciət forması", widget: "object", fields: [s("title", "Başlıq"), t("lede", "Mətn"), strList("benefits", "Nə alacaqsınız"), s("button", "Düymə"), s("consent", "Razılıq mətni"), s("once_note", "Demo qaydası (bir dəfə, 24 saat)", opt)] },
           { name: "thanks", label: "Təşəkkür səhifəsi", widget: "object", fields: [s("title", "Başlıq"), t("text", "Mətn")] },
         ]),
       ],
     },
   ],
 };
+
+// EN/RU bloq kolleksiyaları AZ bloqun sahələrini istifadə edir
+BLOG_BASE = { ...config.collections.find((c) => c.name === "bloq"), name: undefined, label: undefined };
+for (const c of config.collections) if (c.name?.startsWith("blog_")) Object.assign(c, { ...BLOG_BASE, name: c.name, label: c.label, folder: c.folder, preview_path: c.preview_path });
 
 // Demo üçün: test-repo backend-ə real məzmun faylları ötürülür.
 function tree(paths) {

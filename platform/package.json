@@ -1,0 +1,11 @@
+{
+  "name": "marketingschool-platform-assets",
+  "private": true,
+  "description": "Platformanın brauzer asılılıqları (yalnız hls.js). Build yoxdur: fayl public/platform/assets/vendor-ə kopyalanır.",
+  "scripts": {
+    "vendor": "mkdir -p public/platform/assets/vendor && cp node_modules/hls.js/dist/hls.light.min.js public/platform/assets/vendor/"
+  },
+  "dependencies": {
+    "hls.js": "1.6.13"
+  }
+}

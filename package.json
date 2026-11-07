@@ -6,9 +6,11 @@
     "build": "eleventy",
     "start": "eleventy --serve",
     "demo": "DEMO=1 eleventy --output=_demo",
-    "cms": "npx decap-server"
+    "cms": "npx decap-server",
+    "test": "npm run build && node scripts/i18n-migrate.mjs --check && node --test tests/landing.test.mjs",
+    "i18n:migrate": "node scripts/i18n-migrate.mjs"
   },
   "devDependencies": {
-    "@11ty/eleventy": "3.1.6"
+    "@11ty/eleventy": "^3.1.7"
   }
 }

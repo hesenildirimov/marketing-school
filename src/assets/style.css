@@ -3,7 +3,7 @@
 :root{
   color-scheme:light;
   --paper:#FFFFFF; --surface:#FFFFFF; --raise:#F5F7FC; --wash:#FBFCFE;
-  --ink:#0E1324; --ink-soft:#434B61; --muted:#6E7691;
+  --ink:#0E1324; --ink-soft:#434B61; --muted:#5F6783;
   --line:#E6EAF3; --line-soft:#F0F3F9;
   --brand:#FFC400; --brand-deep:#F2B000; --brand-soft:#FFF6D6; --blue:#8A5A00; --blue-soft:#FFF6D6; --blue-deep:#6B4500;
   --coral:#FF6A3D; --coral-soft:#FFF0EA;
@@ -589,3 +589,19 @@ summary{padding-block:13px;font-size:1rem}
 /* Scroll reveal (JS ilə, ~0.6 KB): aşağı düşəndə elementlər yumşaq çıxır */
 .rv{opacity:0;transform:translateY(34px) scale(.98)}
 .rv.in{opacity:1;transform:none;transition:opacity .7s ease var(--d,0ms),transform .75s cubic-bezier(.2,.7,.2,1) var(--d,0ms)}
+
+/* demo forması: açıq razılıq */
+.consent{display:flex;gap:8px;align-items:flex-start;font-weight:450;font-size:.86rem;line-height:1.4;margin-top:16px}
+.consent input{width:auto;margin-top:2px}
+
+/* ===== Dil seçimi (AZ | EN | RU) və dil təklifi — avtomatik yönləndirmə yoxdur ===== */
+.lang-switch{display:inline-flex;gap:2px;margin-left:6px;padding-left:8px;border-left:1px solid var(--line)}
+.lang-switch a{padding:6px 8px;font-size:.8rem;font-weight:600;border-radius:8px;color:var(--muted)}
+.lang-switch a[aria-current=true]{background:var(--brand-soft);color:var(--ink)}
+.lang-suggest{position:sticky;top:0;z-index:30;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;background:var(--brand-soft);border-bottom:1px solid #FFE79A;padding:8px 16px;font-size:.9rem}
+.lang-suggest[hidden]{display:none}
+.lang-suggest a{font-weight:700}
+.lang-suggest button{background:none;border:0;font-size:1.1rem;cursor:pointer;color:var(--ink);padding:0 6px}
+.lang-note{display:inline-block;background:var(--ink);color:#fff;border-radius:10px;padding:8px 12px;font-size:.92rem;margin:0 0 14px}
+.price-tag{font-weight:700;color:var(--ink)}.price-tag small{font-weight:500;color:var(--muted)}
+.site-foot .plain a{text-decoration:underline;text-underline-offset:2px}

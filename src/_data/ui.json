@@ -1,0 +1,53 @@
+{
+  "az": {
+    "skip": "Əsas məzmuna keç", "nav_label": "Əsas naviqasiya", "home": "Ana səhifə", "nav_marketing": "Marketinq", "nav_digital": "Rəqəmsal marketinq", "blog": "Bloq", "faq": "FAQ",
+    "lang_label": "Dil", "foot_courses": "Kurslar", "foot_site": "Sayt", "foot_contact": "Əlaqə", "foot_faq": "Tez-tez verilən suallar", "foot_apply": "Pulsuz demo", "country": "Azərbaycan",
+    "updated": "Son yenilənmə", "cta_demo": "Pulsuz demo dərsə bax", "cta_courses": "Kurslarımız", "eyebrow_programs": "Proqramlar", "see_program": "Proqrama bax", "about": "Haqqımızda",
+    "latest_posts": "Bloqdan son yazılar", "all_posts": "Bütün məqalələr", "all_faq": "Bütün :n sual", "short_answer": "Qısa cavab", "about_course": "Kurs haqqında", "key_facts": "əsas faktlar",
+    "for_whom": "Kimlər üçündür", "outcomes": "Kursdan sonra nə bacaracaqsınız", "tools": "Dərsdə istifadə olunan alətlər", "diff_eyebrow": "Fərq", "diff_title": "Bu kurs nəyi fərqli edir?",
+    "program": "Proqram", "full_program": "Tam kurs proqramı — :n modul", "program_lede": "3 ay · onlayn · hər modulda ev tapşırığı · hər ayın 2-ci və 4-cü şənbəsi canlı sual-cavab.",
+    "instructor": "Təlimçi", "linkedin": "LinkedIn profili", "questions": "suallar", "all_questions": "Bütün suallar", "other_program": "Digər proqram",
+    "stat_duration": "müddət", "stat_modules": "modul", "stat_live_value": "2×/ay", "stat_live": "canlı görüş", "stat_mentoring": "mentorluq", "card_meta": "3 ay · :n modul · Onlayn",
+    "price_line": "99 AZN / ay", "price_note": "Hər kurs ayrıca 99 AZN-dir.", "price_per": "aylıq",
+    "lang_note": "", "lang_note_short": "",
+    "form_name": "Ad və soyad", "form_email": "E-mail", "form_course": "Maraqlandığınız kurs", "form_phone": "Əlaqə nömrəsi", "form_phone_title": "Əlaqə nömrəsini daxil edin, məs: +994 50 000 00 00", "privacy": "Məxfilik siyasəti",
+    "topics": "Mövzular", "faq_cta_title": "Sualınızın cavabını tapmadınız?", "faq_cta_lede": "Pulsuz demoya qoşulun və kursun formatını özünüz görün.",
+    "post_updated": "Yenilənib", "key_points": "Qısaca", "key_points_label": "Qısa xülasə", "sources": "Mənbələr", "deepen": "Bu mövzunu dərinləşdir", "post_nav": "Məqalələr arasında keçid", "no_posts": "Bu dildə hələ yazı yoxdur.",
+    "not_found_title": "Səhifə tapılmadı (404)", "not_found_lede": "Axtardığınız ünvan mövcud deyil və ya köçürülüb. Aşağıdakı səhifələrdən birinə keçin.", "not_found_seo": "Səhifə tapılmadı | Marketing School",
+    "suggest": "Bu səhifə sizin dilinizdə də var:", "suggest_close": "Bağla", "rss_title": "Marketing School Bloqu", "llms_title": "saytın tam mətni", "compare": "Müqayisə"
+  },
+  "en": {
+    "skip": "Skip to main content", "nav_label": "Main navigation", "home": "Home", "nav_marketing": "Marketing", "nav_digital": "Digital marketing", "blog": "Blog", "faq": "FAQ",
+    "lang_label": "Language", "foot_courses": "Courses", "foot_site": "Site", "foot_contact": "Contact", "foot_faq": "Frequently asked questions", "foot_apply": "Free demo", "country": "Azerbaijan",
+    "updated": "Last updated", "cta_demo": "Watch a free demo lesson", "cta_courses": "Our courses", "eyebrow_programs": "Programmes", "see_program": "See the programme", "about": "About us",
+    "latest_posts": "Latest from the blog", "all_posts": "All articles", "all_faq": "All :n questions", "short_answer": "Short answer", "about_course": "About the course", "key_facts": "key facts",
+    "for_whom": "Who it is for", "outcomes": "What you will be able to do", "tools": "Tools used in the lessons", "diff_eyebrow": "What's different", "diff_title": "What makes this course different?",
+    "program": "Programme", "full_program": "Full programme — :n modules", "program_lede": "3 months · online · homework in every module · live Q&A on the 2nd and 4th Saturday of every month.",
+    "instructor": "Instructor", "linkedin": "LinkedIn profile", "questions": "questions", "all_questions": "All questions", "other_program": "Our other programme",
+    "stat_duration": "duration", "stat_modules": "modules", "stat_live_value": "2×/month", "stat_live": "live Q&A", "stat_mentoring": "mentoring", "card_meta": "3 months · :n modules · Online",
+    "price_line": "99 AZN per month", "price_note": "Each course is billed separately at 99 AZN per month.", "price_per": "per month",
+    "lang_note": "Please note: this course is taught in Azerbaijani. Video lessons, live sessions and homework feedback are in Azerbaijani.", "lang_note_short": "Taught in Azerbaijani",
+    "form_name": "Full name", "form_email": "Email", "form_course": "Course you are interested in", "form_phone": "Phone number", "form_phone_title": "Enter your phone number, e.g. +994 50 000 00 00", "privacy": "Privacy Policy",
+    "topics": "Topics", "faq_cta_title": "Didn't find your answer?", "faq_cta_lede": "Try the free demo and see the course format for yourself.",
+    "post_updated": "Updated", "key_points": "Key points", "key_points_label": "Summary", "sources": "Sources", "deepen": "Go deeper on this topic", "post_nav": "More articles", "no_posts": "There are no articles in this language yet.",
+    "not_found_title": "Page not found (404)", "not_found_lede": "The page you are looking for does not exist or has moved. Try one of these pages instead.", "not_found_seo": "Page not found | Marketing School",
+    "suggest": "This page is also available in your language:", "suggest_close": "Close", "rss_title": "Marketing School Blog", "llms_title": "full site text", "compare": "Compare"
+  },
+  "ru": {
+    "skip": "Перейти к основному содержанию", "nav_label": "Основная навигация", "home": "Главная", "nav_marketing": "Маркетинг", "nav_digital": "Цифровой маркетинг", "blog": "Блог", "faq": "FAQ",
+    "lang_label": "Язык", "foot_courses": "Курсы", "foot_site": "Сайт", "foot_contact": "Контакты", "foot_faq": "Частые вопросы", "foot_apply": "Бесплатное демо", "country": "Азербайджан",
+    "updated": "Последнее обновление", "cta_demo": "Смотреть бесплатный демо-урок", "cta_courses": "Наши курсы", "eyebrow_programs": "Программы", "see_program": "Смотреть программу", "about": "О нас",
+    "latest_posts": "Новое в блоге", "all_posts": "Все статьи", "all_faq": "Все вопросы (:n)", "short_answer": "Коротко", "about_course": "О курсе", "key_facts": "основные факты",
+    "for_whom": "Для кого курс", "outcomes": "Что вы будете уметь", "tools": "Инструменты на уроках", "diff_eyebrow": "Отличия", "diff_title": "Чем этот курс отличается?",
+    "program": "Программа", "full_program": "Полная программа — :n модулей", "program_lede": "3 месяца · онлайн · домашнее задание в каждом модуле · живые встречи во 2-ю и 4-ю субботу месяца.",
+    "instructor": "Преподаватель", "linkedin": "Профиль в LinkedIn", "questions": "вопросы", "all_questions": "Все вопросы", "other_program": "Другая программа",
+    "stat_duration": "длительность", "stat_modules": "модулей", "stat_live_value": "2×/мес", "stat_live": "живые встречи", "stat_mentoring": "менторство", "card_meta": "3 месяца · :n модулей · Онлайн",
+    "price_line": "99 AZN в месяц", "price_note": "Каждый курс оплачивается отдельно — 99 AZN в месяц.", "price_per": "в месяц",
+    "lang_note": "Обратите внимание: курс проходит на азербайджанском языке. Видеоуроки, живые встречи и обратная связь — на азербайджанском.", "lang_note_short": "На азербайджанском языке",
+    "form_name": "Имя и фамилия", "form_email": "Эл. почта", "form_course": "Интересующий курс", "form_phone": "Номер телефона", "form_phone_title": "Введите номер телефона, например +994 50 000 00 00", "privacy": "Политика конфиденциальности",
+    "topics": "Темы", "faq_cta_title": "Не нашли ответ?", "faq_cta_lede": "Попробуйте бесплатное демо и оцените формат курса сами.",
+    "post_updated": "Обновлено", "key_points": "Коротко", "key_points_label": "Краткое содержание", "sources": "Источники", "deepen": "Узнать больше по теме", "post_nav": "Другие статьи", "no_posts": "На этом языке статей пока нет.",
+    "not_found_title": "Страница не найдена (404)", "not_found_lede": "Страница не существует или была перемещена. Перейдите на одну из страниц ниже.", "not_found_seo": "Страница не найдена | Marketing School",
+    "suggest": "Эта страница есть и на вашем языке:", "suggest_close": "Закрыть", "rss_title": "Блог Marketing School", "llms_title": "полный текст сайта", "compare": "Сравнение"
+  }
+}

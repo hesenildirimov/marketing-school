@@ -1,4 +1,5 @@
 ---
+translation_key: share-of-voice-esov
 title: "SOV və SOM: reklam payı ilə bazar payı arasındakı əlaqə"
 seo_title: "SOV və SOM — ESOV ilə Büdcə Planlaması"
 description: "Share of Voice bazar payından yüksək olanda brend böyüyür, aşağı olanda kiçilir. ESOV çərçivəsinin büdcə planlamasında necə istifadə olunacağı."

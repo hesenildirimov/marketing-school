@@ -6,7 +6,7 @@
   ],
   "tagline": "Azərbaycan dilində onlayn marketinq və digital marketinq kursları.",
   "slogan": "",
-  "description": "Marketing School Azərbaycan dilində onlayn marketinq və rəqəmsal (digital) marketinq kursları təqdim edən təhsil platformasıdır. 3 aylıq proqramlar: videodərslər, canlı sual-cavab, real keyslər, fərdi mentorluq, diplom. Pulsuz demo: platformaya 1 günlük giriş.",
+  "description": "Marketing School Azərbaycan dilində onlayn marketinq və rəqəmsal (digital) marketinq kursları təqdim edən təhsil platformasıdır. 3 aylıq proqramlar: videodərslər, canlı sual-cavab, real keyslər, fərdi mentorluq, diplom. Hər kurs ayrıca 99 AZN/aydır. Pulsuz demo: seçilmiş kursun ilk 2 moduluna 24 saatlıq giriş.",
   "city": "Bakı",
   "country": "AZ",
   "address": "",
@@ -38,21 +38,22 @@
       "url": "https://facebook.com/marketingschool.az"
     }
   ],
-  "updated": "2026-11-01",
+  "updated": "2026-11-02",
   "form": {
     "title": "Pulsuz demo dərsə giriş əldə edin",
-    "lede": "Formu doldurun — platformaya 1 günlük pulsuz giriş göndərək. Demo dərsə baxın, kursun formatını özünüz görün.",
+    "lede": "Formu doldurun — seçdiyiniz kursun ilk 2 moduluna 24 saatlıq pulsuz giriş açılacaq. Demo dərslərə baxın, kursun formatını özünüz görün.",
     "benefits": [
-      "Platformaya 1 günlük pulsuz giriş",
-      "Demo dərs",
-      "Modul-modul tam proqram (PDF)",
-      "Qiymət və qeydiyyat qaydası"
+      "İlk 2 modula 24 saatlıq pulsuz giriş",
+      "Videodərslər, progress və qeydlər saxlanılır",
+      "Qiymət: hər kurs ayrıca 99 AZN/ay",
+      "Ödənişdən sonra eyni hesabla davam"
     ],
     "button": "Pulsuz giriş al",
-    "consent": "Formu göndərməklə sizinlə əlaqə saxlanmasına razılıq verirsiniz."
+    "consent": "Məlumatlarımın demo giriş və kursla bağlı əlaqə üçün emal olunmasına razılıq verirəm.",
+    "once_note": "Demo bütün platformada yalnız bir dəfə verilir: seçdiyiniz kursun ilk 2 moduluna 24 saatlıq giriş. Videodərslər Azərbaycan dilindədir."
   },
   "thanks": {
     "title": "Müraciətiniz qəbul edildi",
-    "text": "Təşəkkür edirik. Platformaya 1 günlük pulsuz giriş məlumatını e-mail ünvanınıza göndərəcəyik."
+    "text": "Təşəkkür edirik. E-mailinizə giriş linki göndərdik: linkə keçin, parol təyin edin və 24 saatlıq pulsuz demoya başlayın."
   }
 }

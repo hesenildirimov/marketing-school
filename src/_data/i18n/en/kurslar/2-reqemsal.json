@@ -1,0 +1,169 @@
+{
+  "name": "Digital Marketing Course",
+  "alt_names": [
+    "Online digital marketing course",
+    "Digital marketing course in Azerbaijan",
+    "SMM, SEO and advertising course",
+    "Digital marketing course Baku"
+  ],
+  "seo_title": "Online Digital Marketing Course in Azerbaijan",
+  "seo_description": "A 3-month online digital marketing course taught in Azerbaijani: SEO, SMM, Meta and Google Ads, GA4. 10 modules, real cases, 1:1 mentoring. 99 AZN/month.",
+  "eyebrow": "Online digital marketing course · taught in Azerbaijani",
+  "h1": "Digital Marketing Course — online, from Azerbaijan",
+  "lede": "A hands-on 3-month online programme in digital marketing: SEO, social media, Meta and Google advertising, Google Analytics and conversion optimisation. Taught by Zamir Shabanov.",
+  "summary": "The Digital Marketing Course is Marketing School's 3-month online programme, taught in Azerbaijani. Across 10 modules it covers SEO, social media marketing, Meta Ads, Google Ads, Google Analytics 4, conversion rate optimisation and email marketing. Lessons are recorded and can be watched at any time; live Q&A sessions run on the 2nd and 4th Saturday of every month, homework is based on real business cases, and every student gets a one-to-one mentoring session after completing the lessons. The course costs 99 AZN per month. Students who meet the assessment threshold receive a diploma. The instructor is Zamir Shabanov, Leading Digital Marketing Specialist at AzInTelecom.",
+  "chips": [
+    "Online · any time",
+    "3 months",
+    "99 AZN / month",
+    "10 modules",
+    "Real cases",
+    "1:1 mentoring",
+    "Diploma"
+  ],
+  "focus": "Execution: SEO, SMM, Meta Ads, Google Ads, GA4, conversion",
+  "for_whom_short": "People who want practical skills and a quick start",
+  "teacher_short": "Zamir Shabanov",
+  "card_text": "SEO, social media, Meta and Google advertising, measurement in Google Analytics and turning more website visitors into customers — all on real cases.",
+  "overview": "The course covers the core tools of digital marketing: getting a website to rank in search (SEO), social media content (SMM), Meta and Google advertising, measurement in Google Analytics and improving how well a website converts visitors into sales. Each module combines video lessons with homework based on a real business case. Twice a month, on the 2nd and 4th Saturday, the instructor answers your questions live, and once you have completed the lessons you book a one-to-one mentoring session.",
+  "facts": [
+    {
+      "label": "Format",
+      "value": "Online, recorded video lessons you can watch at any time"
+    },
+    {
+      "label": "Duration",
+      "value": "3 months (standard); you can continue month by month if you need more time"
+    },
+    {
+      "label": "Live sessions",
+      "value": "Online Q&A on the 2nd and 4th Saturday of every month, 11:00 Baku time (UTC+4)"
+    },
+    {
+      "label": "Mentoring",
+      "value": "One-to-one session with the instructor after you complete all lessons"
+    },
+    {
+      "label": "Homework",
+      "value": "Based on real business cases"
+    },
+    {
+      "label": "Modules",
+      "value": "10"
+    },
+    {
+      "label": "Topics",
+      "value": "SEO, SMM, Meta Ads, Google Ads, GA4, CRO, email"
+    },
+    {
+      "label": "Level",
+      "value": "Beginner to intermediate"
+    },
+    {
+      "label": "Prerequisites",
+      "value": "Confident computer use"
+    },
+    {
+      "label": "Language",
+      "value": "Azerbaijani (video lessons, live sessions and feedback)"
+    },
+    {
+      "label": "Certificate",
+      "value": "Diploma for students who score at least 75% across mandatory assignments"
+    },
+    {
+      "label": "Price",
+      "value": "99 AZN per month (each course is billed separately)"
+    }
+  ],
+  "audience": [
+    "People starting out in digital marketing",
+    "Aspiring SMM managers, paid media specialists and content specialists",
+    "Professionals who want to run their company's ad accounts themselves",
+    "Business owners who want more website traffic and sales"
+  ],
+  "outcomes": [
+    "Set up campaigns in Meta and Google Ads and manage the budget",
+    "Run keyword research and a basic SEO audit for a website",
+    "Build a social media content calendar suited to each platform",
+    "Set up conversions in Google Analytics 4 and read the reports",
+    "Run A/B tests to improve a page's conversion rate"
+  ],
+  "features": [
+    {
+      "title": "Practical, with real cases",
+      "text": "Homework is based on real marketing cases: you build campaigns, read reports and analyse the results."
+    },
+    {
+      "title": "Hands-on with the tools",
+      "text": "Meta Ads Manager, Google Ads and Google Analytics 4 are shown step by step in the lessons and used in the assignments."
+    },
+    {
+      "title": "Measuring what matters",
+      "text": "How to see how many sales your advertising actually brings in, and how to build a report that shows it."
+    }
+  ],
+  "modules": [
+    {
+      "title": "Introduction to digital marketing",
+      "text": "The customer journey, defining your audience and when to choose which channel."
+    },
+    {
+      "title": "Website and user experience",
+      "text": "What makes a good page: structure, speed, mobile layout and forms."
+    },
+    {
+      "title": "SEO — technical",
+      "text": "Making sure Google reads your site correctly: indexing, speed and site structure."
+    },
+    {
+      "title": "SEO — content",
+      "text": "Which words people search for, how to structure content and how to use internal links."
+    },
+    {
+      "title": "Content and social media (SMM)",
+      "text": "Formats that suit each platform, content calendars and community management."
+    },
+    {
+      "title": "Meta advertising",
+      "text": "Building campaigns, choosing audiences, testing creatives and managing budgets."
+    },
+    {
+      "title": "Google advertising",
+      "text": "Search ads, keywords, how the auction works and Performance Max."
+    },
+    {
+      "title": "Google Analytics 4",
+      "text": "Setting up events and conversions, reading reports and building audiences."
+    },
+    {
+      "title": "Conversion rate optimisation (CRO)",
+      "text": "What improves a page, how to set up an A/B test and how to read the results."
+    },
+    {
+      "title": "Email and automation",
+      "text": "Building a list, segmenting it and setting up automated email flows."
+    }
+  ],
+  "instructor": {
+    "name": "Zamir Shabanov",
+    "role": "Leading Digital Marketing Specialist, AzInTelecom",
+    "knows_about": [
+      "SEO",
+      "Paid search advertising",
+      "Meta Ads",
+      "Google Analytics",
+      "Email marketing",
+      "App store optimisation (ASO)"
+    ],
+    "highlights": [
+      "SEO, advertising and analytics at Nar, AzerTurkBank, IATM and AzInTelecom since 2021",
+      "Experience with ASO and Google Play / App Store advertising",
+      "Google Digital Garage, Google Ads Video and LinkedIn Ads certifications"
+    ],
+    "short": [
+      "SEO, advertising and analytics at Nar, AzerTurkBank, IATM and AzInTelecom since 2021",
+      "Experience with ASO and Google Play / App Store advertising"
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "seo_title": "Online Marketing Courses in Azerbaijan | Marketing School",
+  "seo_description": "Online marketing and digital marketing courses from Baku, taught in Azerbaijani: recorded lessons, live Q&A, real cases, 1:1 mentoring. 99 AZN/month.",
+  "eyebrow": "Online marketing school · Baku, Azerbaijan",
+  "h1": "Learn marketing through <em>real cases</em>",
+  "lede": "Two 3-month online programmes taught in Azerbaijani by practising marketers. Watch at your own pace, join live Q&A twice a month and finish with a one-to-one mentoring session.",
+  "stats": [
+    { "value": "2", "label": "programmes" },
+    { "value": "99 AZN", "label": "per month, per course" },
+    { "value": "19", "label": "modules" },
+    { "value": "1:1", "label": "mentoring" }
+  ],
+  "why": [
+    { "icon": "open", "title": "Any time, anywhere", "text": "Lessons are recorded, so you can learn around your schedule and rewatch whenever you need to." },
+    { "icon": "case", "title": "Homework built on real cases", "text": "Every module ends with an assignment based on a real marketing case, so you apply the theory straight away." },
+    { "icon": "people", "title": "Live sessions and personal mentoring", "text": "Live Q&A on the 2nd and 4th Saturday of every month, plus a one-to-one session with your instructor once you finish the lessons." }
+  ],
+  "why_title": "Why Marketing School?",
+  "courses_title": "Our courses",
+  "courses_lede": "Two separate programmes: one on marketing decisions, the other on execution in digital channels. Each course costs 99 AZN per month.",
+  "compare_title": "Which course is right for you?",
+  "faq_title": "Questions about our marketing courses",
+  "cta_title": "Try a course free for 24 hours",
+  "team_title": "Instructors",
+  "team_lede": "Both courses are taught by marketers who work in the field today."
+}

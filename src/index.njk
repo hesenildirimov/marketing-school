@@ -1,20 +1,19 @@
 ---
 layout: base.njk
-slug: ""
 heroDark: true
-eleventyComputed:
-  permalink: "{{ '' | out }}"
-  seo_title: "{{ home.seo_title }}"
-  seo_description: "{{ home.seo_description }}"
+pagination: { data: langs, size: 1, alias: lang }
 ---
 {%- from "icons.njk" import ico -%}
-{%- set homeFaq = faq.items | where("show_on", "home") | batch(6) | first -%}
+{%- set L = loc[lang] -%}{%- set u = L.ui -%}{%- set home = L.home -%}
+{%- set homeFaq = L.faq.items | where("show_on", "home") | batch(6) | first -%}
+{%- set posts = collections["posts_" + lang] -%}
 <section class="hero dark"><div class="wrap hero-grid">
   <div class="hero-text">
     {% if home.eyebrow %}<p class="eyebrow up u1">{{ home.eyebrow }}</p>{% endif %}
     <h1 class="up u2">{{ home.h1 | safe }}</h1>
     {% if home.lede %}<p class="lede up u3">{{ home.lede }}</p>{% endif %}
-    <div class="btns up u4"><a class="btn" href="#muraciet">Pulsuz demo dərsə bax <span class="arw">&#8594;</span></a><a class="btn btn-ghost" href="#kurslar">Kurslarımız</a></div>
+    {% if u.lang_note %}<p class="lang-note up u3">{{ u.lang_note }}</p>{% endif %}
+    <div class="btns up u4"><a class="btn" href="#muraciet">{{ u.cta_demo }} <span class="arw">&#8594;</span></a><a class="btn btn-ghost" href="#kurslar">{{ u.cta_courses }}</a></div>
   </div>
   <div class="hero-art" aria-hidden="true">
     <svg viewBox="0 0 420 350" role="presentation">
@@ -22,24 +21,23 @@ eleventyComputed:
       <g class="board"><rect x="54" y="52" width="300" height="214" rx="22" class="board-bg"/><rect x="78" y="78" width="88" height="10" rx="5" class="ln1"/><rect x="78" y="98" width="140" height="8" rx="4" class="ln2"/>
         <g class="bars"><rect x="82" y="178" width="42" height="54" rx="10" class="c1"/><rect x="140" y="156" width="42" height="76" rx="10" class="c2"/><rect x="198" y="128" width="42" height="104" rx="10" class="c3"/><rect x="256" y="96" width="42" height="136" rx="10" class="c4"/></g>
         <path class="arrow" d="M96 206 L160 176 L218 146 L282 110"/><path class="arrow-h" d="M268 104 L284 108 L278 123"/></g>
-      <g class="fchip f1"><rect x="2" y="104" width="118" height="44" rx="14"/><circle cx="28" cy="126" r="13" class="d1"/><path class="chk" d="M22 126l4.4 4.4L34.4 121"/><text x="50" y="131">3 ay · onlayn</text></g>
-      <g class="fchip f2"><rect x="286" y="236" width="130" height="44" rx="14"/><circle cx="312" cy="258" r="13" class="d2"/><path class="chk" d="M306 258l4.4 4.4L318.4 253"/><text x="334" y="263">Diplom</text></g>
-      <g class="fchip f3"><rect x="118" y="292" width="150" height="44" rx="14"/><circle cx="144" cy="314" r="13" class="d3"/><path class="chk" d="M138 314l4.4 4.4L150.4 309"/><text x="166" y="319">Real keyslər</text></g>
+      <g class="fchip f1"><rect x="2" y="104" width="118" height="44" rx="14"/><circle cx="28" cy="126" r="13" class="d1"/><path class="chk" d="M22 126l4.4 4.4L34.4 121"/><text x="50" y="131">{{ L.courses[0].chips[2] }}</text></g>
+      <g class="fchip f2"><rect x="286" y="236" width="130" height="44" rx="14"/><circle cx="312" cy="258" r="13" class="d2"/><path class="chk" d="M306 258l4.4 4.4L318.4 253"/><text x="334" y="263">{{ L.courses[0].chips[6] }}</text></g>
+      <g class="fchip f3"><rect x="118" y="292" width="150" height="44" rx="14"/><circle cx="144" cy="314" r="13" class="d3"/><path class="chk" d="M138 314l4.4 4.4L150.4 309"/><text x="166" y="319">{{ L.courses[0].chips[4] }}</text></g>
       <g class="conf"><circle cx="384" cy="166" r="5"/><circle cx="36" cy="54" r="6"/><circle cx="400" cy="298" r="4"/><circle cx="18" cy="202" r="4.5"/></g>
     </svg>
   </div>
   <div class="stats up u5">{% for s in home.stats %}<div><b>{{ s.value }}</b><span>{{ s.label }}</span></div>{% endfor %}</div>
 </div></section>
 <section class="why"><div class="wrap"><h2>{{ home.why_title }}</h2><div class="grid">{% for w in home.why %}<article class="card"><span class="ico-wrap">{{ ico(w.icon) | safe }}</span><h3>{{ w.title }}</h3><p>{{ w.text }}</p></article>{% endfor %}</div></div></section>
-<section id="kurslar" class="sec-tint-b"><div class="wrap"><p class="eyebrow">Proqramlar</p><h2>{{ home.courses_title }}</h2>
+<section id="kurslar" class="sec-tint-b"><div class="wrap"><p class="eyebrow">{{ u.eyebrow_programs }}</p><h2>{{ home.courses_title }}</h2>
   <p class="lede">{{ home.courses_lede }}</p>
-  <div class="grid">{% for c in courses %}<article class="card"><div class="c-head"><span class="ico-wrap">{{ ico(c.icon) | safe }}</span><div><h3><a href="{{ c.slug | link }}">{{ c.name }}</a></h3><small>3 ay · {{ c.modules.length }} modul · Onlayn</small></div></div><div class="c-body"><ul class="meta-row">{% for ch in c.chips | batch(3) | first %}<li>{{ ch }}</li>{% endfor %}</ul><p>{{ c.card_text }}</p><p><a href="{{ c.slug | link }}">Proqrama bax <span class="arw">&#8594;</span></a></p></div></article>{% endfor %}</div>
+  <div class="grid">{% for c in L.courses %}<article class="card"><div class="c-head"><span class="ico-wrap">{{ ico(c.icon) | safe }}</span><div><h3><a href="{{ routes.course[c.slug][lang] | link }}">{{ c.name }}</a></h3><small>{{ u.card_meta | fill({n: c.modules.length}) }}</small></div></div><div class="c-body"><p class="price-tag">{{ u.price_line }} <small>· {{ u.price_note }}</small></p><ul class="meta-row">{% for ch in c.chips | batch(3) | first %}<li>{{ ch }}</li>{% endfor %}</ul><p>{{ c.card_text }}</p><p><a href="{{ routes.course[c.slug][lang] | link }}">{{ u.see_program }} <span class="arw">&#8594;</span></a></p></div></article>{% endfor %}</div>
 </div></section>
-<section class="sec-tint-c" id="telimciler"><div class="wrap"><p class="eyebrow">Haqqımızda</p><h2>{{ home.team_title }}</h2><p class="lede">{{ home.team_lede }}</p>
-  <div class="grid">{% for c in courses %}{% set p = c.instructor %}<article class="card person"><div class="p-head"><img class="avatar" src="{{ p.photo | asset }}" alt="{{ p.name }}" width="64" height="64" loading="lazy"><div><h3>{{ p.name }}</h3><small>{{ p.role }}</small></div></div><ul class="tick">{% for h in p.short %}<li>{{ h }}</li>{% endfor %}</ul><p><a href="{{ c.slug | link }}">{{ c.name }} <span class="arw">&#8594;</span></a>{% if p.linkedin %} · <a rel="me noopener" target="_blank" href="{{ p.linkedin }}">LinkedIn</a>{% endif %}</p></article>{% endfor %}</div></div></section>
+<section class="sec-tint-c" id="telimciler"><div class="wrap"><p class="eyebrow">{{ u.about }}</p><h2>{{ home.team_title }}</h2><p class="lede">{{ home.team_lede }}</p>
+  <div class="grid">{% for c in L.courses %}{% set p = c.instructor %}<article class="card person"><div class="p-head"><img class="avatar" src="{{ p.photo | asset }}" alt="{{ p.name }}" width="64" height="64" loading="lazy"><div><h3>{{ p.name }}</h3><small>{{ p.role }}</small></div></div><ul class="tick">{% for h in p.short %}<li>{{ h }}</li>{% endfor %}</ul><p><a href="{{ routes.course[c.slug][lang] | link }}">{{ c.name }} <span class="arw">&#8594;</span></a>{% if p.linkedin %} · <a rel="me noopener" target="_blank" href="{{ p.linkedin }}">LinkedIn</a>{% endif %}</p></article>{% endfor %}</div></div></section>
 {% set formTitle = home.cta_title %}{% include "form.njk" %}
-{% if collections.posts.length %}<section><div class="wrap"><p class="eyebrow">Bloq</p><h2>Bloqdan son yazılar</h2><ul class="posts">{% for p in collections.posts | batch(3) | first %}<li><article><span class="pthumb">{{ ico('book') | safe }}</span><div><time datetime="{{ p.date | ymd }}">{{ p.date | ymd }}</time><h3><a href="{{ p.data.slug | link }}">{{ p.data.title }}</a></h3><p>{{ p.data.description }}</p></div></article></li>{% endfor %}</ul><div class="btns"><a class="btn btn-ghost" href="{{ 'bloq' | link }}">Bütün məqalələr →</a></div></div></section>{% endif %}
+{% if posts.length %}<section><div class="wrap"><p class="eyebrow">{{ u.blog }}</p><h2>{{ u.latest_posts }}</h2><ul class="posts">{% for p in posts | batch(3) | first %}<li><article><span class="pthumb">{{ ico('book') | safe }}</span><div><time datetime="{{ p.date | ymd }}">{{ p.date | ymd }}</time><h3><a href="{{ p.data.slug | link }}">{{ p.data.title }}</a></h3><p>{{ p.data.description }}</p></div></article></li>{% endfor %}</ul><div class="btns"><a class="btn btn-ghost" href="{{ routes.blog[lang] | link }}">{{ u.all_posts }} →</a></div></div></section>{% endif %}
 <section><div class="wrap"><p class="eyebrow">FAQ</p><h2>{{ home.faq_title }}</h2>
   {% set faqItems = homeFaq %}{% include "faq-list.njk" %}
-  <div class="btns"><a class="btn btn-ghost" href="{{ 'faq' | link }}">Bütün {{ faq.items.length }} sual →</a></div></div></section>
-
+  <div class="btns"><a class="btn btn-ghost" href="{{ routes.faq[lang] | link }}">{{ u.all_faq | fill({n: L.faq.items.length}) }} →</a></div></div></section>
