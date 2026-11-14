@@ -4,7 +4,7 @@ WORKDIR /build
 COPY platform/package.json platform/package-lock.json ./
 RUN npm ci --ignore-scripts && mkdir -p out && cp node_modules/hls.js/dist/hls.light.min.js out/
 
-FROM php:8.4-fpm-alpine
+FROM php:8.5-fpm-alpine
 RUN apk add --no-cache icu-libs libzip libpng freetype libjpeg-turbo postgresql-libs fcgi \
  && apk add --no-cache --virtual .build $PHPIZE_DEPS icu-dev libzip-dev libpng-dev freetype-dev libjpeg-turbo-dev postgresql-dev linux-headers \
  && docker-php-ext-configure gd --with-freetype --with-jpeg \
